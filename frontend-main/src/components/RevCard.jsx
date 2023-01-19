@@ -3,6 +3,8 @@ import { Chart } from './Chart';
 import "./RevCard.css"
 import { DoughnutGraph } from './DoughnutGraph';
 import { AreaChart } from './AreaChart';
+import { Link } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 
 const word = ".....Read More";
 function RevCard(props) {
@@ -25,45 +27,57 @@ function RevCard(props) {
     const rev3 = "wl is small as long as the homework is finished you can get full homework points GP must find a good teammate Everyone can do it quickly Jasmine is so beautiful The lecture rules are also very clear Year 1 is so happy to be able to attend Jasmines class";
     const rev4 = "Teacher Jasmine is beautiful and kind The lectures are fairly detailed but in fact it‚Äôs okay to pass the lecture after all it‚Äôs all in the textbooks It‚Äôs not difficult at the end of the middle term and the tutor is also very friendly Remember to brush the questions the last A";
     const positivity = [0.9514653, 0.88381404, 0.8015666, 0.7618263, 0.7179695, 0.7113937, 0.68775207, 0.6774518, 0.6630249, 0.6200911, 0.6038591, 0.5192287, 0.5036624, 0.4346099, 0.39620933, 0.30017233,0.2641734 ,0.24582438, 0.16832131, 0.15503797, 0.13489337, 0.05200941, 0.040517766, 0.02402413, 0.013435159, 0.009198183]; 
-  
+                    
+    console.log("correct?")
+    console.log(props.reviewRanges)
+
+
+
     return (
     
-    <div className="master">
-        <div className="leftcol" style={{width: "30%"}}>
-            <h1 style={{fontSize: "22px", fontWeight: "bold"}}>
-                {props.courseCode}: {props.courseName}
-            </h1>
-            {/* <div style={{paddingLeft: "30px",fontSize: "14px", paddingTop: "10px"}}>
-                {props.instructors.map((instructor) => {
-                    return (
-                        <p>{instructor}</p>
-                    )
-                })}
-            </div> */}
-            <div style={{paddingLeft: "30px", paddingTop: "8px", fontSize: "12px", width: "400px"}}>
-                <div style={{fontSize: "15px", fontWeight: "bold"}}>Reviews:</div> 
-                <p style={{paddingBottom: "3px"}}>{rev1.substring(0,100)}<b style={{color: "blue"}}> .....Read More</b></p>
-                <p style={{paddingBottom: "3px"}}>{rev2.substring(0,100)}<b style={{color: "blue"}}> .....Read More</b></p>
-                <p style={{paddingBottom: "3px"}}>{rev3.substring(0,100)}<b style={{color: "blue"}}> .....Read More</b></p>
-                <p style={{paddingBottom: "3px"}}>{rev4.substring(0,100)}<b style={{color: "blue"}}> .....Read More</b></p>
+    <Link to={"/courses/reviews/"+props.courseCode} state={{ props: props }}>
+        <div className="master">
+            <div className="leftcol" style={{width: "30%"}}>
+                <h1 style={{fontSize: "22px", fontWeight: "bold"}}>
+                    {props.courseCode}: {props.courseName}
+                </h1>
+                {/* <div style={{paddingLeft: "30px",fontSize: "14px", paddingTop: "10px"}}>
+                    {props.instructors.map((instructor) => {
+                        return (
+                            <p>{instructor}</p>
+                        )
+                    })}
+                </div> */}
+                <div style={{paddingLeft: "30px", paddingTop: "8px", fontSize: "12px", width: "400px"}}>
+                    <div style={{fontSize: "15px", fontWeight: "bold"}}>Reviews:</div> 
+                    {props.courseReviews.filter((item,index) => index < 4).map(((reviews) => {
+                        return (
+                            <p style={{paddingBottom: "3px"}}>{reviews.actualReview.substring(0,100)}<b style={{color: "blue"}}> .....Read More</b></p>
+                        )
+                    }))}
+                    {/* <p style={{paddingBottom: "3px"}}>{rev1.substring(0,100)}<b style={{color: "blue"}}> .....Read More</b></p>
+                    <p style={{paddingBottom: "3px"}}>{rev2.substring(0,100)}<b style={{color: "blue"}}> .....Read More</b></p>
+                    <p style={{paddingBottom: "3px"}}>{rev3.substring(0,100)}<b style={{color: "blue"}}> .....Read More</b></p>
+                    <p style={{paddingBottom: "3px"}}>{rev4.substring(0,100)}<b style={{color: "blue"}}> .....Read More</b></p> */}
+                </div>
             </div>
-        </div>
-        <div style={{width: "500px", paddingLeft: "150px", fontSize: "12px", paddingTop: "50px", paddingRight: "30px"}}>
-            <p style={{fontSize: "15px", fontWeight: "bold", paddingTop: "13px"}}>Number of reviews:</p>
-            <ul>
-                <li>1.0-Positivity-0.8: Loved the course!</li>
-                <li>0.8-Positivity-0.6-Didnt mind the course!</li>
-                <li>0.6-Positivity-0.4: Bearable course!</li>
-                <li>0.4-Positivity-0.2-Unbearable course!</li>
-                <li>0.2-Positivity-0.0-Hated the course!</li>
-            </ul>
-        </div>
-        <div className="barchart">
-            {/* <AreaChart /> */}
-            <DoughnutGraph />
-        </div>
+            <div style={{width: "500px", paddingLeft: "150px", fontSize: "12px", paddingTop: "50px", paddingRight: "30px"}}>
+                <p style={{fontSize: "15px", fontWeight: "bold", paddingTop: "13px"}}>Number of reviews:</p>
+                <ul>
+                    <li>1.0-Positivity-0.8: Loved the course!</li>
+                    <li>0.8-Positivity-0.6-Didnt mind the course!</li>
+                    <li>0.6-Positivity-0.4: Bearable course!</li>
+                    <li>0.4-Positivity-0.2-Unbearable course!</li>
+                    <li>0.2-Positivity-0.0-Hated the course!</li>
+                </ul>
+            </div>
+            <div className="barchart">
+                {/* <AreaChart /> */}
+                <DoughnutGraph reviewRanges={props.reviewRanges} />
+            </div>
 
-    </div>
+        </div>
+    </Link>
   )
 }
 

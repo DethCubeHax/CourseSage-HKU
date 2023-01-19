@@ -111,48 +111,50 @@ function Home() {
                 </div> */}
                 <div>
                     {/* <div>{data2.courseCode}</div> */}
-                    {data2 && <Card 
-                        courseCode={data2.courseCode}
-                        courseName={data2.courseName}
-                        instructors={data2.courseInstructors}
-                        bestRev={data2.bestReview}
-                        gradeList={data2.gradeList}
-                        gradeListDetailed={data2.gradeListDetailed}
-                    />}
-                    {activeTab === "by-grades" &&
-                        courseList.map((course) => {
-                            return(
-
-                                <div>
-                                {/* <Link to={"/courses/grades/"+course.courseCode} > */}
-                                    <Card 
-                                        courseCode={course.courseCode}
-                                        courseName={course.courseName}
-                                        instructors={course.instructors}
-                                        bestRev={course.bestRev}
-                                        gradeList={course.gradeList}
-                                        gradeListDetailed={course.gradeListDetailed}
-                                    />
-                                    {/* <CourseGradePage open={openModal} /> */}
-                                {/* </Link> */}
-                                </div>
+                    {/* {data2 && 
+                        data2.sortedByGrades.map((course1) => {
+                            return (
+                                <Card 
+                                    courseCode={course1.courseCode}
+                                    courseName={course1.courseName}
+                                    instructors={course1.courseInstructors}
+                                    bestRev={course1.bestReview}
+                                    gradeList={course1.gradeList}
+                                    gradeListDetailed={course1.gradeListDetailed}
+                                />
                             )
+                    })} */}
+                    {activeTab === "by-grades" &&
+                        data2 && 
+                            data2.sortedByGrades.map((course1) => {
+                                return (
+                                    <Card 
+                                        courseCode={course1.courseCode}
+                                        courseName={course1.courseName}
+                                        instructors={course1.courseInstructors}
+                                        bestRev={course1.bestReview}
+                                        gradeList={course1.gradeList}
+                                        gradeListDetailed={course1.gradeListDetailed}
+                                    />
+                                )
                         })
+ 
                     }
                     {
-                        activeTab === "by-reviews" &&
-                            courseRevList.map((course) => {
-                                return (
-                                    <Link to={"/courses/reviews/"+course.courseCode}>
+                        activeTab === "by-reviews" && 
+                            data2 &&
+                                data2.sortedByReviews.map((course) => {
+                                    return (
+
                                         <RevCard 
                                             courseCode={course.courseCode}
                                             courseName={course.courseName}
-                                            courseReviews={course.courseReviews}
-                                            positivity={course.positivity}
+                                            reviewRanges={course.reviewRanges}
+                                            courseReviews={course.allReviews}
                                         />
-                                    </Link>
-                                )
-                            }) 
+
+                                    )
+                                }) 
                     }
                 </div>
             </DetailWrapper>

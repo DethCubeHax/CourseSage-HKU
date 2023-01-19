@@ -10,13 +10,13 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 //0.4-0.2-didn't enjoy the course
 //0.0-0.2- hated the course
 
-export function DoughnutGraph() {
+export function DoughnutGraph(props) {
     const data = {
     labels: ['1.0<x<0.8-Loved the course!', '0.8<x<0.6-Didnt mind the course!', '0.6<x<0.4-Bearable course!', '0.4<x<0.2-Unbearable course!', '0.2<x<0.0-Hated the course!'],
         datasets: [
             {
             label: '# of Reviews',
-            data: [12, 19, 3, 5, 2],
+            data: props.reviewRanges,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.5)',
                 'rgba(54, 162, 235, 0.5)',
@@ -56,5 +56,6 @@ export function DoughnutGraph() {
         },
 
     }
+    console.log(props.reviewRanges)
   return <Doughnut options={options} data={data} />;
 }
