@@ -1,0 +1,27 @@
+.master {
+    flex-direction: row;
+    /* justify-content: baseline; */
+    box-shadow: 0 0px 3.5px 0 rgba(0, 0, 0, 0.5);
+    width: 70%;
+    /* margin: auto; */
+    margin-left: 40px;
+    border-radius: 1rem;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.leftcol {
+    /* display: flex;
+    justify-content: space-between; */
+    /* margin-right: 60px; */
+
+}
+
+.barchart {
+    /* display: flex;
+    justify-content: space-between; */
+    padding-top: 30px;
+    width: 50%;
+    height: 250px;
+}
+
