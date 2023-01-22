@@ -13,7 +13,7 @@ const CourseGradePage = ({ open, onClose, props }) => {
 
   let navigate = useNavigate();
   const routerChange = () => {
-    const path1 = "/courses/reviews/"+props.courseCode;
+    const path1 = "/";
     let path = `${path1}`;
     navigate(path);
   }
@@ -53,27 +53,27 @@ const CourseGradePage = ({ open, onClose, props }) => {
               </div>
 
               <div style={{display: "flex"}}>
-                <p style={{paddingRight: "55px"}}>A  : {gradeFull[1]}</p>
-                <p style={{paddingRight: "60px"}}>B  : {gradeFull[4]}</p>
-                <p style={{paddingRight: "50px"}}>C  : {gradeFull[7]}</p>
+                <p style={{paddingRight: "60px"}}>A  : {gradeFull[1]}</p>
+                <p style={{paddingRight: "65px"}}>B  : {gradeFull[4]}</p>
+                <p style={{paddingRight: "60px"}}>C  : {gradeFull[7]}</p>
               </div>
 
               <div style={{display: "flex"}}>
-                <p style={{paddingRight: "47px"}}>A- : {gradeFull[2]}</p>
-                <p style={{paddingRight: "53px"}}>B- : {gradeFull[5]}</p>
+                <p style={{paddingRight: "57px"}}>A- : {gradeFull[2]}</p>
+                <p style={{paddingRight: "56px"}}>B- : {gradeFull[5]}</p>
                 <p style={{paddingRight: "50px"}}>C- : {gradeFull[8]}</p>
               </div>
 
               <div style={{display: "flex"}}>
-                <p style={{paddingRight: "55px"}}>D : {gradeFull[9]}</p>
+                <p style={{paddingRight: "73px"}}>D : {gradeFull[9]}</p>
                 <p>Fail: {gradeFull[10]}</p>
               </div>
             </div>
 
           </div>
           <div className='btnContainer' style={{paddingTop: "40px", paddingLeft: "40px"}}>
-            <button className='btnPrimary' onClick={routerChange}>
-              Check out student reviews
+            <button className='btnPrimary' onClick={onClose}>
+              Exit
             </button>
             {/* <button className='btnOutline'>
               <span className='bold'>NO</span>, thanks

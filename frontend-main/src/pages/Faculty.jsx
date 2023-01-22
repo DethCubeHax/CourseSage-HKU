@@ -8,11 +8,15 @@ import { Link } from 'react-router-dom';
 import Card from '../components/Card';
 import RevCard from '../components/RevCard';
 import Axios from 'axios';
+import ReactPaginate from 'react-paginate';
+import "./Faculty.css";
 
+const PER_PAGE = 10;
 
 function Faculty() {
   
   const [activeTab, setActiveTab] = useState("by-grades");
+  const [currentPage, setCurrentPage] = useState(0);
   let params = useParams();
 //   console.log("errverv ");
   console.log(params.name);
@@ -68,6 +72,13 @@ function Faculty() {
   console.log("laods?")
   console.log(data2);
 
+  const offset = currentPage * PER_PAGE;
+  const pageCount = 100;
+
+  function handlePageClick({selected: selectedPage}) {
+    setCurrentPage(selectedPage)
+  }
+
   return (
     <div>
         <div>
@@ -84,7 +95,9 @@ function Faculty() {
                 <div>
                     {activeTab === "by-grades" &&
                         data2 && 
-                            data2.sortedByGrades.map((course1) => {
+                            data2.sortedByGrades
+                            .slice(offset, offset + PER_PAGE)
+                            .map((course1) => {
                                 let courseGrades = course1.gradeList;
                                 if (courseGrades === null) {
                                     courseGrades = [0,0,0,0,0]
@@ -126,7 +139,9 @@ function Faculty() {
                     {
                         activeTab === "by-reviews" &&
                             data2 &&
-                                data2.sortedByReviews.map((course) => {
+                                data2.sortedByReviews
+                                .slice(offset, offset + PER_PAGE)
+                                .map((course) => {
                                     return (
 
                                         <RevCard 
@@ -141,6 +156,19 @@ function Faculty() {
                     }
                 </div>
             </DetailWrapper>
+        </div>
+        <div className='container'>
+            <ReactPaginate
+                previousLabel={"Previous"}
+                nextLabel={"Next"}
+                pageCount={pageCount}
+                onPageChange={handlePageClick}
+                containerClassName={"pagination"}
+                previousLinkClassName={"pagination__link"}
+                nextLinkClassName={"pagination__link"}
+                disabledClassName={"pagination__link--disabled"}
+                activeClassName={"pagination__link--active"}
+            />
         </div>
     </div>
   )

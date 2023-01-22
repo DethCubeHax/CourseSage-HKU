@@ -39,8 +39,8 @@ function Card(props) {
                     {/* {props.instructors} */}
                 </div>
                 <div style={{paddingLeft: "30px", paddingTop: "8px", fontSize: "12px", width: "400px"}}>
-                    <div style={{fontSize: "15px", fontWeight: "bold"}}>Best Review:</div> 
-                    <p>{props.bestRev}</p>
+                    <div style={{fontSize: "18px", fontWeight: "bold"}}>Best Review:</div> 
+                    <p style={{fontSize: "14px"}}>{props.bestRev}</p>
                 </div>
             </div>
 

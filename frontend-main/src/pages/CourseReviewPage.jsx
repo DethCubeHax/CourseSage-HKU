@@ -1,13 +1,45 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
+import Axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 import { DoughnutGraph } from '../components/DoughnutGraph';
 import UserReview from '../components/UserReview';
-import './CourseReviewPage.css'
+import './CourseReviewPage.css';
 
 function CourseReviewPage() {
   const location = useLocation();
-  console.log("locationwhat?")
-  console.log(location.state.props)
+  // console.log("locationwhat?")
+  // console.log(location.state.props.bestRev)
+    const [data2,setData] = useState();
+    const params = useParams();
+
+    const getData = async() => {
+      // const check = localStorage.getItem("check");
+      // if (check) {
+      //     setData(JSON.parse(check))
+      // }
+      // else {
+      //     const receipt = await Axios.get("http://localhost:8000/");
+      //     localStorage.setItem("check",JSON.stringify(receipt.data));
+      //     setData(receipt.data);
+      // }
+      const receipt = await Axios.get("http://localhost:8000/"+params.name);
+      setData(receipt.data);
+    };
+
+    // useEffect(() => {
+    //   getData()
+    // },[]);
+  if (location.state.props.bestRev !== undefined) {
+    console.log("Yessir")
+    // console.log(location.state.props)
+    getData()
+    console.log(data2)
+  }
+  else {
+    console.log("nooooo")
+    
+
+  }
   return (
     // <div>CourseReviewPage</div>
     <div style={{display: "flex"}}>

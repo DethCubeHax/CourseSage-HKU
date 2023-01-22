@@ -488,6 +488,20 @@ app.get("/CCCH" , function (req,res) {
     
 });
 
+// app.get("/:name", function(req,res) {
+//     const finder = req.params.name;
+//     Master.findOne({courseCode: finder}, function(err, foundList) {
+//         if (!err) {
+//             console.log("Bingo!")
+//             (foundList.sortedByReviews).findOne({courseCode: "ECON1210"},)
+//             console.log(foundList.sortedByReviews.courseCode === "ECON1210")
+//         }
+//         else {
+//             console.log("Err!")
+//         }
+//     })
+// })
+
 
 //starts server at TCP port 3000
 app.listen(8000, () => {

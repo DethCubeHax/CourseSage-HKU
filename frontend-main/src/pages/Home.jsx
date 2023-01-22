@@ -7,12 +7,15 @@ import { useParams } from 'react-router-dom';
 import RevCard from '../components/RevCard';
 import CourseGradePage from './CourseGradePage';
 import Axios from "axios";
+import ReactPaginate from 'react-paginate';
+import "./Home.css";
 
-
+const PER_PAGE = 10;
 
 function Home() {
 
   const [activeTab, setActiveTab] = useState("by-grades");
+  const [currentPage, setCurrentPage] = useState(0);
   // const [openModal, setOpenModal] = useState(false);
   let params = useParams();
   // console.log("modal state = "+ openModal);
@@ -38,6 +41,13 @@ function Home() {
   },[]);
   console.log("laods?")
   console.log(data2);
+
+  const offset = currentPage * PER_PAGE;
+  let pageCount = 160;
+
+  function handlePageClick({selected: selectedPage}) {
+    setCurrentPage(selectedPage)
+  }
 
   return (
 
@@ -69,7 +79,9 @@ function Home() {
                     })} */}
                     {activeTab === "by-grades" &&
                         data2 && 
-                            data2.sortedByGrades.map((course1) => {
+                            data2.sortedByGrades
+                            .slice(offset, offset + PER_PAGE)
+                            .map((course1) => {
 
                                 let courseGrades = course1.gradeList;
                                 if (courseGrades === null) {
@@ -85,11 +97,19 @@ function Home() {
                                 if (review !== null) {
                                     review = review[4]
                                 }
+                                const capitalizeWords = (str) => {
+                                    return str
+                                    .toLowerCase()
+                                    .split(' ' || ' (')
+                                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                                    .join(' ');
+                                };
+                                let courseName1 = capitalizeWords(course1.courseName);
                                 
                                 return (
                                     <Card 
                                         courseCode={course1.courseCode}
-                                        courseName={course1.courseName}
+                                        courseName={courseName1}
                                         instructors={course1.courseInstructor}
                                         bestRev={review}
                                         gradeList={courseGrades}
@@ -102,12 +122,23 @@ function Home() {
                     {
                         activeTab === "by-reviews" && 
                             data2 &&
-                                data2.sortedByReviews.map((course) => {
+                                data2.sortedByReviews
+                                .slice(offset, offset + PER_PAGE)
+                                .map((course) => {
+
+                                const capitalizeWords = (str) => {
+                                    return str
+                                    .toLowerCase()
+                                    .split(' ' || ' (')
+                                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                                    .join(' ');
+                                };
+                                let courseName1 = capitalizeWords(course.courseName);
                                     return (
 
                                         <RevCard 
                                             courseCode={course.courseCode}
-                                            courseName={course.courseName}
+                                            courseName={courseName1}
                                             reviewRanges={course.reviewRanges}
                                             courseReviews={course.allReviews}
                                         />
@@ -117,6 +148,19 @@ function Home() {
                     }
                 </div>
             </DetailWrapper>
+        </div>
+        <div className='container'>
+        <ReactPaginate
+            previousLabel={"Previous"}
+            nextLabel={"Next"}
+            pageCount={pageCount}
+            onPageChange={handlePageClick}
+            containerClassName={"pagination"}
+            previousLinkClassName={"pagination__link"}
+            nextLinkClassName={"pagination__link"}
+            disabledClassName={"pagination__link--disabled"}
+            activeClassName={"pagination__link--active"}
+        />
         </div>
     </div>
     
