@@ -43,7 +43,7 @@ export function Chart(props) {
     },
     };
 
-    const labels = ['A', 'B', 'C', 'D', 'Pass', 'Fail'];
+    const labels = ['A', 'B', 'C', 'D', 'Fail'];
 
     const data = {
     labels,

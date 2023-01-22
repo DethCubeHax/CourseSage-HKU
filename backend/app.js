@@ -4,7 +4,7 @@ const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/courseListDB',{useNewURLParser: true});
+mongoose.connect('mongodb://localhost:27017/richku2',{useNewURLParser: true});
 
 
 //for the grades for each course
@@ -28,7 +28,7 @@ const courseforGradeSchema = new mongoose.Schema({
     gradeListDetailed: Array
 });
 
-const Grade = mongoose.model("Grade",courseforGradeSchema);
+const Grade = mongoose.model("Grade",courseforGradeSchema);  
 
 const courseforReviewSchema = new mongoose.Schema({
     courseCode: {
@@ -58,7 +58,7 @@ const grade1 = new Grade({
     gradeList: [15,3,20,2,5],
     gradeListDetailed: [1,2,3,4,5,6,7,8,9,10]
 });
-// grade1.save();
+
 
 const grade2 = new Grade({
     courseCode: "ACCT1102",
@@ -68,7 +68,7 @@ const grade2 = new Grade({
     gradeList: [15,3,20,2,5],
     gradeListDetailed: [1,2,3,4,5,6,7,8,9,10]
 });
-// grade2.save();
+
 
 const grade3 = new Grade({
     courseCode: "ACCT1103",
@@ -78,7 +78,7 @@ const grade3 = new Grade({
     gradeList: [15,3,20,2,5],
     gradeListDetailed: [1,2,3,4,5,6,7,8,9,10]
 });
-// grade3.save();
+
 
 const review1 = new Review({
     courseCode: "ACCT1101",
@@ -94,7 +94,7 @@ const review1 = new Review({
     }]
 });
 
-// review1.save();
+
 
 const review2 = new Review({
     courseCode: "ACCT1102",
@@ -107,10 +107,23 @@ const review2 = new Review({
     {
         actualReview: "I love the course",
         positivityScore: 0.79
-    }]
+    },
+    {
+        actualReview: "I love the course",
+        positivityScore: 0.79
+    },
+    {
+        actualReview: "I love the coursekjernvkljdrnkrenkjrenvjkerfdnvjkernvkjerfnkjernvkejrnvdrkjfnderfkjjkdfndfkjvndfvkjdfkjndfbvkjdfv kjdf kdfjvn dkfjv dfvk",
+        positivityScore: 0.79
+    },
+    {
+        actualReview: "I love the coursekdjsfnvjfkdnvkldfsnkjsfnvkjsdnoernjoerijo ciunewriunewj chrberinciunsrfiuerbiurnv irv ireuneriuviunrvnvjniunfiurnvijdfr",
+        positivityScore: 0.79
+    }
+]
 });
 
-// review2.save();
+
 
 const review3 = new Review({
     courseCode: "ACCT1103",
@@ -123,10 +136,77 @@ const review3 = new Review({
     {
         actualReview: "I love the course",
         positivityScore: 0.79
-    }]
+    },
+    {
+        actualReview: "I love the course",
+        positivityScore: 0.79
+    },
+    {
+        actualReview: "I love the coursekjernvkljdrnkrenkjrenvjkerfdnvjkernvkjerfnkjernvkejrnvdrkjfnderfkjjkdfndfkjvndfvkjdfkjndfbvkjdfv kjdf kdfjvn dkfjv dfvk",
+        positivityScore: 0.79
+    },
+    {
+        actualReview: "I love the coursekdjsfnvjfkdnvkldfsnkjsfnvkjsdnoernjoerijo ciunewriunewj chrberinciunsrfiuerbiurnv irv ireuneriuviunrvnvjniunfiurnvijdfr",
+        positivityScore: 0.79
+    }
+]
 });
 
-// review3.save();
+const review4 = new Review({
+    courseCode: "ACCT1103",
+    courseName: "Introduction to Financial Accounting",
+    reviewRanges: [1,2,3,4,5],
+    allReviews: [{
+        actualReview: "Best course no cap",
+        positivityScore: 0.67
+    },
+    {
+        actualReview: "I love the course",
+        positivityScore: 0.79
+    },
+    {
+        actualReview: "I love the course",
+        positivityScore: 0.79
+    },
+    {
+        actualReview: "I love the coursekjernvkljdrnkrenkjrenvjkerfdnvjkernvkjerfnkjernvkejrnvdrkjfnderfkjjkdfndfkjvndfvkjdfkjndfbvkjdfv kjdf kdfjvn dkfjv dfvk",
+        positivityScore: 0.79
+    },
+    {
+        actualReview: "I love the coursekdjsfnvjfkdnvkldfsnkjsfnvkjsdnoernjoerijo ciunewriunewj chrberinciunsrfiuerbiurnv irv ireuneriuviunrvnvjniunfiurnvijdfr",
+        positivityScore: 0.79
+    }
+]
+});
+
+const review5 = new Review({
+    courseCode: "ACCT1103",
+    courseName: "Introduction to Financial Accounting",
+    reviewRanges: [1,2,3,4,5],
+    allReviews: [{
+        actualReview: "Best course no cap",
+        positivityScore: 0.67
+    },
+    {
+        actualReview: "I love the course",
+        positivityScore: 0.79
+    },
+    {
+        actualReview: "I love the course",
+        positivityScore: 0.79
+    },
+    {
+        actualReview: "I love the coursekjernvkljdrnkrenkjrenvjkerfdnvjkernvkjerfnkjernvkejrnvdrkjfnderfkjjkdfndfkjvndfvkjdfkjndfbvkjdfv kjdf kdfjvn dkfjv dfvk",
+        positivityScore: 0.79
+    },
+    {
+        actualReview: "I love the coursekdjsfnvjfkdnvkldfsnkjsfnvkjsdnoernjoerijo ciunewriunewj chrberinciunsrfiuerbiurnv irv ireuneriuviunrvnvjniunfiurnvijdfr",
+        positivityScore: 0.79
+    }
+]
+});
+
+
 
 const facultySchema = new mongoose.Schema({
     facultyName: {
@@ -143,8 +223,30 @@ const Faculty = mongoose.model("Faculty", facultySchema);
 const fbe = new Faculty({
     facultyName: "Business",
     sortedByGrades: [grade1,grade2,grade3],
-    sortedByReviews:[review1,review2,review3]
+    sortedByReviews:[review1,review2,review3,review4,review5]
 });
+
+const masterSchema = new mongoose.Schema({
+    facultyName: {
+        type: String,
+        required: [true, "Faculty name must be specified"]
+    },
+    sortedByGrades: [],
+    sortedByReviews: []
+});
+
+
+const Master = mongoose.model("Master", masterSchema);
+
+
+// grade1.save();
+// grade2.save();
+// grade3.save();
+// review1.save();
+// review2.save();
+// review3.save();
+// review4.save();
+// review5.save();
 // fbe.save()
 
 
@@ -161,20 +263,230 @@ app.use(express.static("public"));
 app.use(cors());
 
 
-app.get("/" , function (req,res) {
-    Grade.findOne({courseCode: "ACCT1101"}, function(err,foundList) {
+app.get("/FBE" , function (req,res) {
+    Master.findOne({facultyName: "Faculty of Business and Economics"}, function(err,foundList) {
         if (!err) {
-            console.log("found bro"+ foundList)
+            console.log("Found Successfully");
+            // console.log(foundList);
             res.send(foundList);
         }
         else {
-            console.log("error bro!")
+            console.log("Error Logged")
         }
     })
-    console.log("something work plx");
+    console.log("This GET req runs");
     
 })
 
+app.get("/CAES" , function (req,res) {
+    Master.findOne({facultyName: "Center for Applied English Studies"}, function(err,foundList) {
+        if (!err) {
+            console.log("Found Successfully");
+            // console.log(foundList);
+            res.send(foundList);
+        }
+        else {
+            console.log("Error Logged")
+        }
+    })
+    console.log("This GET req runs");
+    
+})
+
+app.get("/social" , function (req,res) {
+    Master.findOne({facultyName: "Faculty of Social Sciences"}, function(err,foundList) {
+        if (!err) {
+            console.log("Found Successfully");
+            // console.log(foundList);
+            res.send(foundList);
+        }
+        else {
+            console.log("Error Logged")
+        }
+    })
+    console.log("This GET req runs");
+    
+})
+
+app.get("/arts" , function (req,res) {
+    Master.findOne({facultyName: "Faculty of Arts"}, function(err,foundList) {
+        if (!err) {
+            console.log("Found Successfully");
+            // console.log(foundList);
+            res.send(foundList);
+        }
+        else {
+            console.log("Error Logged")
+        }
+    })
+    console.log("This GET req runs");
+    
+});
+
+app.get("/science" , function (req,res) {
+    Master.findOne({facultyName: "Faculty of Science"}, function(err,foundList) {
+        if (!err) {
+            console.log("Found Successfully");
+            // console.log(foundList);
+            res.send(foundList);
+        }
+        else {
+            console.log("Error Logged")
+        }
+    })
+    console.log("This GET req runs");
+    
+});
+
+app.get("/education" , function (req,res) {
+    Master.findOne({facultyName: "Faculty of Education"}, function(err,foundList) {
+        if (!err) {
+            console.log("Found Successfully");
+            // console.log(foundList);
+            res.send(foundList);
+        }
+        else {
+            console.log("Error Logged")
+        }
+    })
+    console.log("This GET req runs");
+    
+});
+
+app.get("/medicine" , function (req,res) {
+    Master.findOne({facultyName: "Faculty of Medicine"}, function(err,foundList) {
+        if (!err) {
+            console.log("found bro");
+            // console.log(foundList);
+            res.send(foundList);
+        }
+        else {
+            console.log("Error Logged")
+        }
+    })
+    console.log("This GET req runs");
+    
+});
+
+app.get("/engineering" , function (req,res) {
+    Master.findOne({facultyName: "Faculty of Engineering"}, function(err,foundList) {
+        if (!err) {
+            console.log("Found Successfully");
+            // console.log(foundList);
+            res.send(foundList);
+        }
+        else {
+            console.log("Error Logged")
+        }
+    })
+    console.log("This GET req runs");
+    
+});
+
+app.get("/law" , function (req,res) {
+    Master.findOne({facultyName: "Faculty of Law"}, function(err,foundList) {
+        if (!err) {
+            console.log("Found Successfully");
+            // console.log(foundList);
+            res.send(foundList);
+        }
+        else {
+            console.log("Error Logged")
+        }
+    })
+    console.log("This GET req runs");
+    
+});
+
+app.get("/engineering" , function (req,res) {
+    Master.findOne({facultyName: "Faculty of Engineering"}, function(err,foundList) {
+        if (!err) {
+            console.log("Found Successfully");
+            // console.log(foundList);
+            res.send(foundList);
+        }
+        else {
+            console.log("Error Logged")
+        }
+    })
+    console.log("This GET req runs");
+    
+});
+
+app.get("/graduate" , function (req,res) {
+    Master.findOne({facultyName: "Graduate School"}, function(err,foundList) {
+        if (!err) {
+            console.log("Found Successfully");
+            // console.log(foundList);
+            res.send(foundList);
+        }
+        else {
+            console.log("Error Logged")
+        }
+    })
+    console.log("This GET req runs");
+    
+});
+
+app.get("/CCST" , function (req,res) {
+    Master.findOne({facultyName: "CCST"}, function(err,foundList) {
+        if (!err) {
+            console.log("Found Successfully");
+            // console.log(foundList);
+            res.send(foundList);
+        }
+        else {
+            console.log("Error Logged")
+        }
+    })
+    console.log("This GET req runs");
+    
+});
+
+app.get("/CCGL" , function (req,res) {
+    Master.findOne({facultyName: "CCGL"}, function(err,foundList) {
+        if (!err) {
+            console.log("Found Successfully");
+            // console.log(foundList);
+            res.send(foundList);
+        }
+        else {
+            console.log("Error Logged")
+        }
+    })
+    console.log("This GET req runs");
+    
+});
+
+app.get("/CCHU" , function (req,res) {
+    Master.findOne({facultyName: "CCHU"}, function(err,foundList) {
+        if (!err) {
+            console.log("Found Successfully");
+            // console.log(foundList);
+            res.send(foundList);
+        }
+        else {
+            console.log("Error Logged")
+        }
+    })
+    console.log("This GET req runs");
+    
+});
+
+app.get("/CCCH" , function (req,res) {
+    Master.findOne({facultyName: "CCCH"}, function(err,foundList) {
+        if (!err) {
+            console.log("Found Successfully");
+            // console.log(foundList);
+            res.send(foundList);
+        }
+        else {
+            console.log("Error Logged")
+        }
+    })
+    console.log("This GET req runs");
+    
+});
 
 
 //starts server at TCP port 3000

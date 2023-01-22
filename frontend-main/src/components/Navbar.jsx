@@ -83,15 +83,20 @@ export default function Navbar() {
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
-                    <Dropdown.Item href="/faculty/architecture">Architecture</Dropdown.Item>
+                    <Dropdown.Item href="/faculty/Business and Economics">FBE</Dropdown.Item>
                     <Dropdown.Item href="/faculty/arts">Arts</Dropdown.Item>
-                    <Dropdown.Item href="/faculty/FBE">FBE</Dropdown.Item>
-                    <Dropdown.Item href="/faculty/dentistry">Dentistry</Dropdown.Item>
+                    <Dropdown.Item href="/faculty/science">Science</Dropdown.Item>
+                    <Dropdown.Item href="/faculty/Social Sciences">Social Sciences</Dropdown.Item>
+                    <Dropdown.Item href="/faculty/education">Education</Dropdown.Item>
+                    <Dropdown.Item href="/faculty/medicine">Medicine</Dropdown.Item>
+                    <Dropdown.Item href="/faculty/Center for Applied English Studies">CAES</Dropdown.Item>
+                    {/* <Dropdown.Item href="/faculty/dentistry">Dentistry</Dropdown.Item> */}
                     <Dropdown.Item href="/faculty/engineering">Engineering</Dropdown.Item>
                     <Dropdown.Item href="/faculty/law">Law</Dropdown.Item>
-                    <Dropdown.Item href="/faculty/medicine">Medicine</Dropdown.Item>
-                    <Dropdown.Item href="/faculty/science">Science</Dropdown.Item>
-                    <Dropdown.Item href="/faculty/social Science">Social Science</Dropdown.Item>
+                    <Dropdown.Item href="/faculty/Graduate School">Graduate School</Dropdown.Item>
+                    
+                    
+                    
                   </Dropdown.Menu>
                 </Dropdown>
 

@@ -1,17 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { courseList, courseRevList } from './Home';
 
+
 import { Link } from 'react-router-dom';
 import Card from '../components/Card';
 import RevCard from '../components/RevCard';
+import Axios from 'axios';
+
 
 function Faculty() {
   
   const [activeTab, setActiveTab] = useState("by-grades");
   let params = useParams();
-  console.log(activeTab)
+//   console.log("errverv ");
+  console.log(params.name);
 
   let statement = "";
 
@@ -21,6 +25,48 @@ function Faculty() {
   else if (params.name.charAt(0) !== "C") {
     statement = "Faculty of";
   }
+  else if (params.name.charAt(0) === null) {
+    statement = "Faculty of Architecture"
+  }
+  
+
+  const [data2,setData] = useState();
+
+  const getData = async() => {
+    // const check = localStorage.getItem("check");
+    // if (check) {
+    //     setData(JSON.parse(check))
+    // }
+    // else {
+    //     const receipt = await Axios.get("http://localhost:8000/");
+    //     localStorage.setItem("check",JSON.stringify(receipt.data));
+    //     setData(receipt.data);
+    // }
+    let requestUrl = ""
+    if (params.name === "Graduate School") {
+        requestUrl = "http://localhost:8000/graduate"
+    }
+    else if (params.name === "Business and Economics") {
+        requestUrl = "http://localhost:8000/FBE"
+    }
+    else if (params.name === "Social Sciences") {
+        requestUrl = "http://localhost:8000/social"
+    }
+    else if (params.name === "Center for Applied English Studies") {
+        requestUrl = "http://localhost:8000/CAES"
+    }
+    else {
+        requestUrl = "http://localhost:8000/"+params.name
+    }
+    const receipt = await Axios.get(requestUrl);
+    setData(receipt.data);
+  };
+
+  useEffect(() => {
+    getData()
+  },[]);
+  console.log("laods?")
+  console.log(data2);
 
   return (
     <div>
@@ -37,38 +83,61 @@ function Faculty() {
                 </div>
                 <div>
                     {activeTab === "by-grades" &&
-                        courseList.map((course) => {
-                            return(
-                                <div>
-                                {/* <Link to={"/courses/grades/"+course.courseCode}> */}
+                        data2 && 
+                            data2.sortedByGrades.map((course1) => {
+                                let courseGrades = course1.gradeList;
+                                if (courseGrades === null) {
+                                    courseGrades = [0,0,0,0,0]
+                                }
+
+                                let courseGradesDetailed = course1.gradeListDetailed;
+                                if (courseGradesDetailed === null) {
+                                    courseGradesDetailed = [0,0,0,0,0,0,0,0,0,0,0,0,0]
+                                }
+
+                                let review = course1.bestReview;
+                                if (review !== null && params.name === "Graduate School") {
+                                    review = review[1]
+                                }
+                                else if(review !== null && params.name !== "Graduate") {
+                                    review = review[4]
+                                }
+
+                                const capitalizeWords = (str) => {
+                                    return str
+                                    .toLowerCase()
+                                    .split(' ' || ' (')
+                                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                                    .join(' ');
+                                };
+                                let courseName1 = capitalizeWords(course1.courseName);
+                                return (
                                     <Card 
-                                        courseCode={course.courseCode}
-                                        courseName={course.courseName}
-                                        instructors={course.instructors}
-                                        bestRev={course.bestRev}
-                                        gradeList={course.gradeList}
-                                        gradeListDetailed={course.gradeListDetailed}
+                                        courseCode={course1.courseCode}
+                                        courseName={courseName1}
+                                        instructors={course1.courseInstructor}
+                                        bestRev={review}
+                                        gradeList={courseGrades}
+                                        gradeListDetailed={courseGradesDetailed}
                                     />
-                                {/* </Link> */}
-                                </div>
-                                
-                            )
+                                )
                         })
                     }
                     {
                         activeTab === "by-reviews" &&
-                            courseRevList.map((course) => {
-                                return (
-                                    <Link to={"/courses/reviews/"+course.courseCode}>
+                            data2 &&
+                                data2.sortedByReviews.map((course) => {
+                                    return (
+
                                         <RevCard 
                                             courseCode={course.courseCode}
                                             courseName={course.courseName}
-                                            courseReviews={course.courseReviews}
-                                            positivity={course.positivity}
+                                            reviewRanges={course.reviewRanges}
+                                            courseReviews={course.allReviews}
                                         />
-                                    </Link>
-                                )
-                            }) 
+
+                                    )
+                                }) 
                     }
                 </div>
             </DetailWrapper>

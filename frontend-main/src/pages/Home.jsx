@@ -8,6 +8,147 @@ import RevCard from '../components/RevCard';
 import CourseGradePage from './CourseGradePage';
 import Axios from "axios";
 
+
+
+function Home() {
+
+  const [activeTab, setActiveTab] = useState("by-grades");
+  // const [openModal, setOpenModal] = useState(false);
+  let params = useParams();
+  // console.log("modal state = "+ openModal);
+
+  const [data2,setData] = useState();
+
+  const getData = async() => {
+    // const check = localStorage.getItem("check");
+    // if (check) {
+    //     setData(JSON.parse(check))
+    // }
+    // else {
+    //     const receipt = await Axios.get("http://localhost:8000/");
+    //     localStorage.setItem("check",JSON.stringify(receipt.data));
+    //     setData(receipt.data);
+    // }
+    const receipt = await Axios.get("http://localhost:8000/FBE");
+    setData(receipt.data);
+  };
+
+  useEffect(() => {
+    getData()
+  },[]);
+  console.log("laods?")
+  console.log(data2);
+
+  return (
+
+    <div>
+        <div>
+            <DetailWrapper>
+                <div className="button-div" style={{paddingBottom: "40px"}}>
+                    <p style={{marginRight: "2rem", marginTop: "8px"}}>Sort Courses:</p>     
+                    <Button className={activeTab === "by-grades" ? "active" : ""} onClick={() => setActiveTab("by-grades")}>By Best Graded Courses</Button>
+                    <Button className={activeTab === "by-reviews" ? "active" : ""} onClick={() => setActiveTab("by-reviews")}>By Best Reviews/Least Workload</Button>
+                </div>
+                <div className="fac-name" style={{fontSize: "28px", fontWeight: "bold", padding: "20px", marginLeft: "30px"}}>
+                    Faculty of Business and Economics
+                </div>
+                <div>
+                    {/* <div>{data2.courseCode}</div> */}
+                    {/* {data2 && 
+                        data2.sortedByGrades.map((course1) => {
+                            return (
+                                <Card 
+                                    courseCode={course1.courseCode}
+                                    courseName={course1.courseName}
+                                    instructors={course1.courseInstructors}
+                                    bestRev={course1.bestReview}
+                                    gradeList={course1.gradeList}
+                                    gradeListDetailed={course1.gradeListDetailed}
+                                />
+                            )
+                    })} */}
+                    {activeTab === "by-grades" &&
+                        data2 && 
+                            data2.sortedByGrades.map((course1) => {
+
+                                let courseGrades = course1.gradeList;
+                                if (courseGrades === null) {
+                                    courseGrades = [0,0,0,0,0]
+                                }
+
+                                let courseGradesDetailed = course1.gradeListDetailed;
+                                if (courseGradesDetailed === null) {
+                                    courseGradesDetailed = [0,0,0,0,0,0,0,0,0,0,0,0,0]
+                                }
+
+                                let review = course1.bestReview;
+                                if (review !== null) {
+                                    review = review[4]
+                                }
+                                
+                                return (
+                                    <Card 
+                                        courseCode={course1.courseCode}
+                                        courseName={course1.courseName}
+                                        instructors={course1.courseInstructor}
+                                        bestRev={review}
+                                        gradeList={courseGrades}
+                                        gradeListDetailed={courseGradesDetailed}
+                                    />
+                                )
+                        })
+ 
+                    }
+                    {
+                        activeTab === "by-reviews" && 
+                            data2 &&
+                                data2.sortedByReviews.map((course) => {
+                                    return (
+
+                                        <RevCard 
+                                            courseCode={course.courseCode}
+                                            courseName={course.courseName}
+                                            reviewRanges={course.reviewRanges}
+                                            courseReviews={course.allReviews}
+                                        />
+
+                                    )
+                                }) 
+                    }
+                </div>
+            </DetailWrapper>
+        </div>
+    </div>
+    
+  )
+}
+
+const DetailWrapper = styled.div`
+    .button-div {
+        display: flex;
+        width: 90%;
+        margin: auto;
+    }
+    .active {
+        background: #89CBF3;
+        color: white;
+    }
+`;
+
+const Button = styled.button`
+    padding: 0.4rem;
+    color: #313131;
+    background: white;
+    border: 2px solid #89CBF3;
+    border-radius: 1rem;
+    margin-right: 2rem;
+    font-weight: 600;
+    width: 300px;
+`;
+
+
+
+
 const courseList = [
     {courseCode: "ACCT1101",
     courseName: "Introduction to Financial Accounting",
@@ -67,125 +208,5 @@ const courseRevList = [
         positivity: [0.9514653, 0.88381404, 0.8015666, 0.7618263, 0.7179695, 0.7113937, 0.68775207, 0.6774518, 0.6630249, 0.6200911, 0.6038591, 0.5192287, 0.5036624, 0.4346099, 0.39620933, 0.30017233,0.2641734 ,0.24582438, 0.16832131, 0.15503797, 0.13489337, 0.05200941, 0.040517766, 0.02402413, 0.013435159, 0.009198183] 
     }
 ]
-
-function Home() {
-
-  const [activeTab, setActiveTab] = useState("by-grades");
-  // const [openModal, setOpenModal] = useState(false);
-  let params = useParams();
-  // console.log("modal state = "+ openModal);
-
-  const [data2,setData] = useState();
-
-  const getData = async() => {
-    // const check = localStorage.getItem("check");
-    // if (check) {
-    //     setData(JSON.parse(check))
-    // }
-    // else {
-    //     const receipt = await Axios.get("http://localhost:8000/");
-    //     localStorage.setItem("check",JSON.stringify(receipt.data));
-    //     setData(receipt.data);
-    // }
-    const receipt = await Axios.get("http://localhost:8000/");
-    setData(receipt.data);
-  };
-
-  useEffect(() => {
-    getData()
-  },[]);
-  console.log("laods?")
-  console.log(data2);
-  return (
-
-    <div>
-        <div>
-            <DetailWrapper>
-                <div className="button-div" style={{paddingBottom: "40px"}}>
-                    <p style={{marginRight: "2rem", marginTop: "8px"}}>Sort Courses:</p>     
-                    <Button className={activeTab === "by-grades" ? "active" : ""} onClick={() => setActiveTab("by-grades")}>By Best Graded Courses</Button>
-                    <Button className={activeTab === "by-reviews" ? "active" : ""} onClick={() => setActiveTab("by-reviews")}>By Best Reviews/Least Workload</Button>
-                </div>
-                {/* <div className="fac-name" style={{fontSize: "28px", fontWeight: "bold", padding: "20px", marginLeft: "30px"}}>
-                    Faculty of {params.name.charAt(0).toUpperCase()+params.name.slice(1)}
-                </div> */}
-                <div>
-                    {/* <div>{data2.courseCode}</div> */}
-                    {/* {data2 && 
-                        data2.sortedByGrades.map((course1) => {
-                            return (
-                                <Card 
-                                    courseCode={course1.courseCode}
-                                    courseName={course1.courseName}
-                                    instructors={course1.courseInstructors}
-                                    bestRev={course1.bestReview}
-                                    gradeList={course1.gradeList}
-                                    gradeListDetailed={course1.gradeListDetailed}
-                                />
-                            )
-                    })} */}
-                    {activeTab === "by-grades" &&
-                        data2 && 
-                            data2.sortedByGrades.map((course1) => {
-                                return (
-                                    <Card 
-                                        courseCode={course1.courseCode}
-                                        courseName={course1.courseName}
-                                        instructors={course1.courseInstructors}
-                                        bestRev={course1.bestReview}
-                                        gradeList={course1.gradeList}
-                                        gradeListDetailed={course1.gradeListDetailed}
-                                    />
-                                )
-                        })
- 
-                    }
-                    {
-                        activeTab === "by-reviews" && 
-                            data2 &&
-                                data2.sortedByReviews.map((course) => {
-                                    return (
-
-                                        <RevCard 
-                                            courseCode={course.courseCode}
-                                            courseName={course.courseName}
-                                            reviewRanges={course.reviewRanges}
-                                            courseReviews={course.allReviews}
-                                        />
-
-                                    )
-                                }) 
-                    }
-                </div>
-            </DetailWrapper>
-        </div>
-    </div>
-    
-  )
-}
-
-const DetailWrapper = styled.div`
-    .button-div {
-        display: flex;
-        width: 90%;
-        margin: auto;
-    }
-    .active {
-        background: #89CBF3;
-        color: white;
-    }
-`;
-
-const Button = styled.button`
-    padding: 0.4rem;
-    color: #313131;
-    background: white;
-    border: 2px solid #89CBF3;
-    border-radius: 1rem;
-    margin-right: 2rem;
-    font-weight: 600;
-    width: 300px;
-`;
-
 export default Home;
 export {courseList,courseRevList};
