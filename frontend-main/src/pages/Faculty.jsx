@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { courseList, courseRevList } from './Home';
 
 
 import { Link } from 'react-router-dom';
@@ -109,7 +108,7 @@ function Faculty() {
                                 }
 
                                 let review = course1.bestReview;
-                                if (review !== null && params.name === "Graduate School") {
+                                if (review !== null && ((params.name === "Graduate School") || (params.name === "education"))) {
                                     review = review[1]
                                 }
                                 else if(review !== null && params.name !== "Graduate") {
@@ -148,7 +147,7 @@ function Faculty() {
                                             courseCode={course.courseCode}
                                             courseName={course.courseName}
                                             reviewRanges={course.reviewRanges}
-                                            courseReviews={course.allReviews}
+                                            allReviews={course.allReviews}
                                         />
 
                                     )

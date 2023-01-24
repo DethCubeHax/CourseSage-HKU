@@ -5,6 +5,7 @@ import Home from './Home';
 import CourseGradePage from './CourseGradePage';
 import Faculty from './Faculty';
 import CourseReviewPage from './CourseReviewPage';
+import Searched from './Searched';
 
 
 function Pages() {
@@ -12,6 +13,7 @@ function Pages() {
   return (
     <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
+        <Route path="/searched/:name" element={<Searched />} />
         <Route path="/faculty/:name" element={<Faculty />} />
         <Route path="/cc/:name" element={<Faculty />} />
         <Route path="/courses/grades/:name" element={<CourseGradePage />} />

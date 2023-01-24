@@ -17,13 +17,10 @@ const courseforGradeSchema = new mongoose.Schema({
         type: String,
         required: [true, "Course name is needed for course-for-grade-schema!"]
     },
-    courseInstructors: [{
+    courseInstructor: [{
         type: String
     }],
-    bestReview: {
-        type: String,
-        required: false
-    },
+    bestReview: Array,
     gradeList: Array,
     gradeListDetailed: Array
 });
@@ -50,163 +47,6 @@ const courseforReviewSchema = new mongoose.Schema({
 
 const Review = mongoose.model("Review",courseforReviewSchema);
 
-const grade1 = new Grade({
-    courseCode: "ACCT1101",
-    courseName: "Introduction to Financial Accounting",
-    courseInstructors: ["Kyungran Lee","Jasmine Qing","She Ghouman"],
-    bestReview: "Best course I took no cap!",
-    gradeList: [15,3,20,2,5],
-    gradeListDetailed: [1,2,3,4,5,6,7,8,9,10]
-});
-
-
-const grade2 = new Grade({
-    courseCode: "ACCT1102",
-    courseName: "Introduction to Financial Accounting",
-    courseInstructors: ["Kyungran Lee","Jasmine Qing","She Ghouman"],
-    bestReview: "Best course I took no cap!",
-    gradeList: [15,3,20,2,5],
-    gradeListDetailed: [1,2,3,4,5,6,7,8,9,10]
-});
-
-
-const grade3 = new Grade({
-    courseCode: "ACCT1103",
-    courseName: "Introduction to Financial Accounting",
-    courseInstructors: ["Kyungran Lee","Jasmine Qing","She Ghouman"],
-    bestReview: "Best course I took no cap!",
-    gradeList: [15,3,20,2,5],
-    gradeListDetailed: [1,2,3,4,5,6,7,8,9,10]
-});
-
-
-const review1 = new Review({
-    courseCode: "ACCT1101",
-    courseName: "Introduction to Financial Accounting",
-    reviewRanges: [1,2,3,4,5],
-    allReviews: [{
-        actualReview: "Best course no cap",
-        positivityScore: 0.67
-    },
-    {
-        actualReview: "I love the course",
-        positivityScore: 0.79
-    }]
-});
-
-
-
-const review2 = new Review({
-    courseCode: "ACCT1102",
-    courseName: "Introduction to Financial Accounting",
-    reviewRanges: [1,2,3,4,5],
-    allReviews: [{
-        actualReview: "Best course no cap",
-        positivityScore: 0.67
-    },
-    {
-        actualReview: "I love the course",
-        positivityScore: 0.79
-    },
-    {
-        actualReview: "I love the course",
-        positivityScore: 0.79
-    },
-    {
-        actualReview: "I love the coursekjernvkljdrnkrenkjrenvjkerfdnvjkernvkjerfnkjernvkejrnvdrkjfnderfkjjkdfndfkjvndfvkjdfkjndfbvkjdfv kjdf kdfjvn dkfjv dfvk",
-        positivityScore: 0.79
-    },
-    {
-        actualReview: "I love the coursekdjsfnvjfkdnvkldfsnkjsfnvkjsdnoernjoerijo ciunewriunewj chrberinciunsrfiuerbiurnv irv ireuneriuviunrvnvjniunfiurnvijdfr",
-        positivityScore: 0.79
-    }
-]
-});
-
-
-
-const review3 = new Review({
-    courseCode: "ACCT1103",
-    courseName: "Introduction to Financial Accounting",
-    reviewRanges: [1,2,3,4,5],
-    allReviews: [{
-        actualReview: "Best course no cap",
-        positivityScore: 0.67
-    },
-    {
-        actualReview: "I love the course",
-        positivityScore: 0.79
-    },
-    {
-        actualReview: "I love the course",
-        positivityScore: 0.79
-    },
-    {
-        actualReview: "I love the coursekjernvkljdrnkrenkjrenvjkerfdnvjkernvkjerfnkjernvkejrnvdrkjfnderfkjjkdfndfkjvndfvkjdfkjndfbvkjdfv kjdf kdfjvn dkfjv dfvk",
-        positivityScore: 0.79
-    },
-    {
-        actualReview: "I love the coursekdjsfnvjfkdnvkldfsnkjsfnvkjsdnoernjoerijo ciunewriunewj chrberinciunsrfiuerbiurnv irv ireuneriuviunrvnvjniunfiurnvijdfr",
-        positivityScore: 0.79
-    }
-]
-});
-
-const review4 = new Review({
-    courseCode: "ACCT1103",
-    courseName: "Introduction to Financial Accounting",
-    reviewRanges: [1,2,3,4,5],
-    allReviews: [{
-        actualReview: "Best course no cap",
-        positivityScore: 0.67
-    },
-    {
-        actualReview: "I love the course",
-        positivityScore: 0.79
-    },
-    {
-        actualReview: "I love the course",
-        positivityScore: 0.79
-    },
-    {
-        actualReview: "I love the coursekjernvkljdrnkrenkjrenvjkerfdnvjkernvkjerfnkjernvkejrnvdrkjfnderfkjjkdfndfkjvndfvkjdfkjndfbvkjdfv kjdf kdfjvn dkfjv dfvk",
-        positivityScore: 0.79
-    },
-    {
-        actualReview: "I love the coursekdjsfnvjfkdnvkldfsnkjsfnvkjsdnoernjoerijo ciunewriunewj chrberinciunsrfiuerbiurnv irv ireuneriuviunrvnvjniunfiurnvijdfr",
-        positivityScore: 0.79
-    }
-]
-});
-
-const review5 = new Review({
-    courseCode: "ACCT1103",
-    courseName: "Introduction to Financial Accounting",
-    reviewRanges: [1,2,3,4,5],
-    allReviews: [{
-        actualReview: "Best course no cap",
-        positivityScore: 0.67
-    },
-    {
-        actualReview: "I love the course",
-        positivityScore: 0.79
-    },
-    {
-        actualReview: "I love the course",
-        positivityScore: 0.79
-    },
-    {
-        actualReview: "I love the coursekjernvkljdrnkrenkjrenvjkerfdnvjkernvkjerfnkjernvkejrnvdrkjfnderfkjjkdfndfkjvndfvkjdfkjndfbvkjdfv kjdf kdfjvn dkfjv dfvk",
-        positivityScore: 0.79
-    },
-    {
-        actualReview: "I love the coursekdjsfnvjfkdnvkldfsnkjsfnvkjsdnoernjoerijo ciunewriunewj chrberinciunsrfiuerbiurnv irv ireuneriuviunrvnvjniunfiurnvijdfr",
-        positivityScore: 0.79
-    }
-]
-});
-
-
 
 const facultySchema = new mongoose.Schema({
     facultyName: {
@@ -220,11 +60,6 @@ const facultySchema = new mongoose.Schema({
 
 const Faculty = mongoose.model("Faculty", facultySchema);
 
-const fbe = new Faculty({
-    facultyName: "Business",
-    sortedByGrades: [grade1,grade2,grade3],
-    sortedByReviews:[review1,review2,review3,review4,review5]
-});
 
 const masterSchema = new mongoose.Schema({
     facultyName: {
@@ -238,16 +73,6 @@ const masterSchema = new mongoose.Schema({
 
 const Master = mongoose.model("Master", masterSchema);
 
-
-// grade1.save();
-// grade2.save();
-// grade3.save();
-// review1.save();
-// review2.save();
-// review3.save();
-// review4.save();
-// review5.save();
-// fbe.save()
 
 
 const express = require("express");
@@ -488,19 +313,73 @@ app.get("/CCCH" , function (req,res) {
     
 });
 
-// app.get("/:name", function(req,res) {
-//     const finder = req.params.name;
-//     Master.findOne({courseCode: finder}, function(err, foundList) {
-//         if (!err) {
-//             console.log("Bingo!")
-//             (foundList.sortedByReviews).findOne({courseCode: "ECON1210"},)
-//             console.log(foundList.sortedByReviews.courseCode === "ECON1210")
-//         }
-//         else {
-//             console.log("Err!")
-//         }
-//     })
-// })
+app.get("/search/:name", function(req,res) {
+    //check coursecode present, even as a substring in how many matches
+    //return as an array
+    //render that array when people search for courses on the website'
+    const finder = req.params.name;
+    console.log(finder)
+    let searchHits = []
+    // if (finder.length <= 8) {
+        Grade.find({courseCode: {$regex: /^[finder]*/}}, function(err, foundList) {
+                if (!err) {
+                    console.log("Bingo!")
+                    // (foundList.sortedByReviews).findOne({courseCode: "ECON1210"},)
+                    // console.log(foundList)
+                    const check = foundList;
+                    for (var i in check) {
+                        if (check[i].courseCode.includes(finder)) {
+                            console.log(check[i])
+                            searchHits.push(check[i])
+                            
+                        }
+                    }
+                    console.log(searchHits)
+                    res.send(searchHits)
+                }
+                else {
+                    console.log("Err!")
+                }
+            })
+    // }
+    // else {
+    //     console.log("oh ho")
+    // }
+
+
+
+    // Master.aggregate(
+    //     [
+    //         {$match: {"courseCode": "ENGG1330"}}
+    //     ]
+    // )
+});
+
+app.get("/reviews/:name", function(req,res) {
+    //check coursecode present, even as a substring in how many matches
+    //return as an array
+    //render that array when people search for courses on the website'
+
+    const finder = req.params.name;
+    console.log(finder)
+    let searchHits = []
+    Review.findOne({courseCode: finder}, function(err, foundList) {
+        if (!err) {
+            console.log("Bingo!")
+            // (foundList.sortedByReviews).findOne({courseCode: "ECON1210"},)
+            // console.log(foundList)
+            res.send(foundList)
+        }
+        else {
+            console.log("Err!")
+        }
+    })
+    // Master.aggregate(
+    //     [
+    //         {$match: {}}
+    //     ]
+    // )
+});
 
 
 //starts server at TCP port 3000

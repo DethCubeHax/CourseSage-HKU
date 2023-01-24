@@ -124,7 +124,7 @@ export default function Navbar() {
                   </a>
                 </Button> */}
                 <Button className="btnRes">
-                  <a href="#Contact">
+                  <a href="/contact">
                     <b>Contact</b>
                   </a>
                 </Button>
@@ -197,9 +197,9 @@ export default function Navbar() {
 
           <Flex alignItems={"center"}>
             <Stack direction={"row"} spacing={7}>
-              <Button onClick={toggleColorMode}>
+              {/* <Button onClick={toggleColorMode}>
                 {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-              </Button>
+              </Button> */}
 
               <Button
                 backgroundColor="#89CBF3"

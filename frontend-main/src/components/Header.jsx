@@ -6,13 +6,15 @@ import { useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 
 function Header() {
-  
+  const [input,setInput] = useState("");
+  const navigate = useNavigate();
+
   const submitHandler = (e) => {
     e.preventDefault();
-    // navigate("/searched/" + input);
+    navigate("/searched/" + input.toUpperCase());
+    
   };
-  const [input,setInput] = useState("");
-//   const navigate = useNavigate();
+
 
   const detectText = (e) => {
     setInput(e.target.value);
@@ -21,9 +23,9 @@ function Header() {
   return (
     <div style={{height: "80px", widht: "100%", paddingTop: "20px", paddingLeft: "38px", paddingRight: "35px", backgroundBlendMode: "hard-light"}}>
         <FormStyle onSubmit={submitHandler}>
-            <div>
+            <div style={{display: "flex", width: "30rem", margin: "auto"}}>
                 <FaSearch />
-                <input onChange={detectText} type="text" placeholder='Click to enter search text' value={input} id="searchHead" />
+                <input onChange={detectText} type="text" placeholder='Enter the course code' value={input} id="searchHead" />
             </div>
         </FormStyle>
     </div>
@@ -61,7 +63,7 @@ const FormStyle = styled.form`
     svg {
         position: absolute;
         top: 50%;
-        left: 19%;
+        left: 0%;
         transform: translate(100%, -50%);
         color: white;
     }

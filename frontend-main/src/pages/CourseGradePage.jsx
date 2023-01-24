@@ -13,9 +13,14 @@ const CourseGradePage = ({ open, onClose, props }) => {
 
   let navigate = useNavigate();
   const routerChange = () => {
-    const path1 = "/";
+    const path1 = "/courses/reviews/"+props.courseCode;
     let path = `${path1}`;
-    navigate(path);
+    navigate(path,
+      {
+        state: {
+          props
+        }
+      });
   }
 
   if (!open) return null;
@@ -41,39 +46,36 @@ const CourseGradePage = ({ open, onClose, props }) => {
             <MdCancel />
           </p>
           <div className='content'>
-            {/* <p>Do you want a</p>
-            <h1>$20 CREDIT</h1>
-            <p>for your first tade? {props.courseCode}</p> */}
             <p className='courseInfo' style={{fontSize:"20px", paddingBottom: "20px"}}>Number of each grade for {props.courseCode}-</p>
-            <div style={{paddingLeft:"100px"}}>
-              <div style={{display: "flex"}}>
-                <p style={{paddingRight: "50px"}}>A+ : {gradeFull[0]}</p>
-                <p style={{paddingRight: "50px"}}>B+ : {gradeFull[3]}</p>
-                <p style={{paddingRight: "50px"}}>C+ : {gradeFull[6]}</p>
-              </div>
 
-              <div style={{display: "flex"}}>
-                <p style={{paddingRight: "60px"}}>A  : {gradeFull[1]}</p>
-                <p style={{paddingRight: "65px"}}>B  : {gradeFull[4]}</p>
-                <p style={{paddingRight: "60px"}}>C  : {gradeFull[7]}</p>
-              </div>
-
-              <div style={{display: "flex"}}>
-                <p style={{paddingRight: "57px"}}>A- : {gradeFull[2]}</p>
-                <p style={{paddingRight: "56px"}}>B- : {gradeFull[5]}</p>
-                <p style={{paddingRight: "50px"}}>C- : {gradeFull[8]}</p>
-              </div>
-
-              <div style={{display: "flex"}}>
-                <p style={{paddingRight: "73px"}}>D : {gradeFull[9]}</p>
-                <p>Fail: {gradeFull[10]}</p>
-              </div>
-            </div>
+            <table>
+              <tbody>
+                <tr>
+                  <td>A+: {gradeFull[0]}</td>
+                  <td>B+: {gradeFull[3]}</td>
+                  <td>C+: {gradeFull[6]}</td>
+                </tr>
+                <tr>
+                  <td>A :  {gradeFull[1]}</td>
+                  <td>B :  {gradeFull[4]}</td>
+                  <td>C :  {gradeFull[7]}</td>
+                </tr>
+                <tr>
+                  <td>A-: {gradeFull[2]}</td>
+                  <td>B-: {gradeFull[5]}</td>
+                  <td>C-: {gradeFull[8]}</td>
+                </tr>
+                <tr>
+                  <td>D : {gradeFull[9]}</td>
+                  <td>   Fail : {gradeFull[10]}</td>
+                </tr>
+              </tbody>
+            </table>
 
           </div>
           <div className='btnContainer' style={{paddingTop: "40px", paddingLeft: "40px"}}>
-            <button className='btnPrimary' onClick={onClose}>
-              Exit
+            <button className='btnPrimary' onClick={routerChange}>
+              Check Out Course Reviews
             </button>
             {/* <button className='btnOutline'>
               <span className='bold'>NO</span>, thanks

@@ -8,45 +8,47 @@ import './CourseReviewPage.css';
 function CourseReviewPage() {
   const location = useLocation();
   // console.log("locationwhat?")
-  // console.log(location.state.props.bestRev)
-    const [data2,setData] = useState();
-    const params = useParams();
+  // console.log(location.state.props)
+  const [data2,setData] = useState();
+  const params = useParams();
+  console.log(params.name)
 
-    const getData = async() => {
-      // const check = localStorage.getItem("check");
-      // if (check) {
-      //     setData(JSON.parse(check))
-      // }
-      // else {
-      //     const receipt = await Axios.get("http://localhost:8000/");
-      //     localStorage.setItem("check",JSON.stringify(receipt.data));
-      //     setData(receipt.data);
-      // }
-      const receipt = await Axios.get("http://localhost:8000/"+params.name);
-      setData(receipt.data);
-    };
+  const getData = async() => {
+    const receipt = await Axios.get("http://localhost:8000/reviews/"+params.name);
+    setData(receipt.data);
+    // console.log(receipt.data)
+  };
 
-    // useEffect(() => {
-    //   getData()
-    // },[]);
-  if (location.state.props.bestRev !== undefined) {
-    console.log("Yessir")
-    // console.log(location.state.props)
-    getData()
-    console.log(data2)
-  }
-  else {
-    console.log("nooooo")
-    
+  useEffect(() => {
+    if (location.state.props.bestRev !== undefined) {
+      console.log("Yessir")
+      getData()
+      
+      
+    }
+    else {
+      console.log("nooooo")
+      setData(location.state.props)
 
-  }
+    }
+  },[]);
+  // getData();
+  console.log(data2)
+  const capitalizeWords = (str) => {
+      return str
+      .toLowerCase()
+      .split(' ' || ' (')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
   return (
-    // <div>CourseReviewPage</div>
+   
     <div style={{display: "flex"}}>
+     {data2 && 
       <div>
+        <h1 style={{fontSize: "25px", fontWeight: "bold", paddingLeft: "30px"}}>{data2.courseCode}: {capitalizeWords(data2.courseName)}</h1>
         <div style={{width: "400px", height: "300px", paddingTop: "10px",paddingLeft: "50px"}}>
-          {/* <DoughnutGraph /> */}
-          <DoughnutGraph reviewRanges={location.state.props.reviewRanges}/>
+          <DoughnutGraph reviewRanges={data2.reviewRanges}/>
         </div>
 
         <div className="legend">
@@ -86,32 +88,18 @@ function CourseReviewPage() {
             </span> 
           </div>
         </div>
-      </div>
+      </div>}
 
-
-
-
-    <div style={{padding: "0", margin: "0"}}>
-    {location.state.props.courseReviews.map((review) => {
-        return(
-          <UserReview 
-          reviewData={review.actualReview}
-          positivityScore={review.positivityScore}
-        />
-        )
-    })}
-    </div>
-    {/* <div style={{padding: "0", margin: "0"}}>
-      <UserReview />
-      <UserReview />    
-    </div> */}
-    
-    {/* <UserReview /> */}
-
-    
-
-      
-      {/* <p>Hello</p> */}
+      {data2 && <div style={{padding: "0", margin: "0"}}>
+      {data2.allReviews.map((review) => {
+          return(
+            <UserReview 
+            reviewData={review.actualReview}
+            positivityScore={review.positivityScore}
+          />
+          )
+      })}
+      </div>}
     </div>
   )
 }

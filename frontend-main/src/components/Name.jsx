@@ -5,16 +5,9 @@ const Name = () => {
     <Text
       as="b"
       fontSize={{ base: "18px", md: "24px", lg: "30px" }}
-    //   style={{ textShadow: "#FC0 1px 0 10px" }}
     >
-      <a href="/">RicHKU Parasite</a>
+      <a href="/">GPAid Alpha HKU</a>
     </Text>
-
-    // <Show breakpoint='(max-width: 1000px)'>
-    // <Text as="b" fontSize='3xl' style={{ textShadow:"#FC0 1px 0 10px"}}>
-    //   Shubham_Verma</Text>
-
-    // </Show>
   );
 };
 
