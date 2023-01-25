@@ -136,9 +136,18 @@ app.post("/reg", async (req, res) => {
 		const salt = await bcrypt.genSalt(Number(process.env.SALT));
 		const hashPassword = await bcrypt.hash(req.body.password, salt);
         const emailAddr = req.body.email
-        console.log(emailAddr)
+        console.log(hashPassword)
         console.log("Password salted and email ready for entering into database!")
-		await new User({ email: emailAddr, password: hashPassword }).save();
+        MongoClient.connect("mongodb://localhost:27017/richku2", function(err, db) {
+            if (err) throw err;
+            var dbo = db.db();
+            var obj = {email: emailAddr, password: hashPassword}
+            dbo.collection("users").insertOne(obj, function(err, res){
+                if (err) throw err;
+                console.log("Added new user")
+                db.close();
+            })
+        })
 		res.status(201).send({ message: "User created successfully" });
 	} catch (error) {
 		res.status(500).send({ message: "Internal Server Error" });
