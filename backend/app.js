@@ -1,4 +1,15 @@
 //jshint esversion:6
+const express = require("express");
+const bodyParser = require("body-parser");
+
+const cors = require("cors");
+
+const app = express();
+
+app.set('view engine','ejs');
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static("public"));
+app.use(cors());
 
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
@@ -75,17 +86,7 @@ const Master = mongoose.model("Master", masterSchema);
 
 
 
-const express = require("express");
-const bodyParser = require("body-parser");
 
-const cors = require("cors");
-
-const app = express();
-
-app.set('view engine','ejs');
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static("public"));
-app.use(cors());
 
 
 app.get("/FBE" , function (req,res) {
@@ -341,18 +342,6 @@ app.get("/search/:name", function(req,res) {
                     console.log("Err!")
                 }
             })
-    // }
-    // else {
-    //     console.log("oh ho")
-    // }
-
-
-
-    // Master.aggregate(
-    //     [
-    //         {$match: {"courseCode": "ENGG1330"}}
-    //     ]
-    // )
 });
 
 app.get("/reviews/:name", function(req,res) {
@@ -366,19 +355,12 @@ app.get("/reviews/:name", function(req,res) {
     Review.findOne({courseCode: finder}, function(err, foundList) {
         if (!err) {
             console.log("Bingo!")
-            // (foundList.sortedByReviews).findOne({courseCode: "ECON1210"},)
-            // console.log(foundList)
             res.send(foundList)
         }
         else {
             console.log("Err!")
         }
     })
-    // Master.aggregate(
-    //     [
-    //         {$match: {}}
-    //     ]
-    // )
 });
 
 
