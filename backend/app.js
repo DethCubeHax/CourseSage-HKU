@@ -48,17 +48,17 @@ const courseforReviewSchema = new mongoose.Schema({
 const Review = mongoose.model("Review",courseforReviewSchema);
 
 
-const facultySchema = new mongoose.Schema({
-    facultyName: {
-        type: String,
-        required: [true, "Faculty name must be specified"]
-    },
-    sortedByGrades: [courseforGradeSchema],
-    sortedByReviews: [courseforReviewSchema]
-});
+// const facultySchema = new mongoose.Schema({
+//     facultyName: {
+//         type: String,
+//         required: [true, "Faculty name must be specified"]
+//     },
+//     sortedByGrades: [courseforGradeSchema],
+//     sortedByReviews: [courseforReviewSchema]
+// });
 
 
-const Faculty = mongoose.model("Faculty", facultySchema);
+// const Faculty = mongoose.model("Faculty", facultySchema);
 
 
 const masterSchema = new mongoose.Schema({
