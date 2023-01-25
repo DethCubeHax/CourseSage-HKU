@@ -1,13 +1,16 @@
 //jshint esversion:6
 const express = require("express");
 const bodyParser = require("body-parser");
+const bcrypt = require("bcrypt");
+const Joi = require("joi");
 
 const cors = require("cors");
 
 const app = express();
 
 app.set('view engine','ejs');
-app.use(bodyParser.urlencoded({extended: true}));
+//app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.use(express.static("public"));
 app.use(cors());
 
@@ -15,6 +18,7 @@ const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
 const mongoose = require('mongoose');
+const { join } = require("path");
 mongoose.connect('mongodb://localhost:27017/richku2',{useNewURLParser: true});
 
 
@@ -84,10 +88,71 @@ const masterSchema = new mongoose.Schema({
 
 const Master = mongoose.model("Master", masterSchema);
 
+// BEGIN USER SCHEMAS
 
+const User = mongoose.model("User", masterSchema)
 
+const userSchema = new mongoose.Schema({
+    email: String,
+    password: String,
+})
 
+app.post("/auth", async function (req, res){
+	try {
+		const { error } = validate(req.body);
+		if (error)
+			return res.status(400).send({ message: error.details[0].message });
 
+		const user = await User.findOne({ email: req.body.email });
+		if (!user)
+			return res.status(401).send({ message: "Invalid Email or Password" });
+
+		const validPassword = await bcrypt.compare(
+			req.body.password,
+			user.password
+		);
+		if (!validPassword)
+			return res.status(401).send({ message: "Invalid Email or Password" });
+
+		const token = user.generateAuthToken();
+		res.status(200).send({ data: token, message: "logged in successfully" });
+	} catch (error) {
+		res.status(500).send({ message: "Internal Server Error" });
+	}
+})
+
+app.post("/reg", async (req, res) => {
+    console.log(req.body.email)
+	try {
+		const { error } = validate(req.body);
+		if (error)
+			return res.status(400).send({ message: error.details[0].message });
+
+        const user = await User.findOne({ email: req.body.email });
+		if (user)
+			return res
+				.status(409)
+				.send({ message: "User with given email already Exist!" });
+		const salt = await bcrypt.genSalt(Number(process.env.SALT));
+		const hashPassword = await bcrypt.hash(req.body.password, salt);
+        const emailAddr = req.body.email
+        console.log(emailAddr)
+        console.log("Password salted and email ready for entering into database!")
+		await new User({ email: emailAddr, password: hashPassword }).save();
+		res.status(201).send({ message: "User created successfully" });
+	} catch (error) {
+		res.status(500).send({ message: "Internal Server Error" });
+	}
+});
+
+const validate = (data) => {
+	const schema = Joi.object({
+		email: Joi.string().email().required().label("Email"),
+		password: Joi.string().required().label("Password"),
+        confirm: Joi.string().required().label("Confirm")
+	});
+	return schema.validate(data);
+};
 
 app.get("/FBE" , function (req,res) {
     Master.findOne({facultyName: "Faculty of Business and Economics"}, function(err,foundList) {
