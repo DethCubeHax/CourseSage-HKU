@@ -3,6 +3,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
+const jwt = require("jsonwebtoken");
+
+JWTPRIVATEKEY = "urppissmol"
 
 const cors = require("cors");
 
@@ -20,7 +23,7 @@ const assert = require('assert');
 const mongoose = require('mongoose');
 const { join } = require("path");
 mongoose.connect('mongodb://localhost:27017/richku2',{useNewURLParser: true});
-
+mongoose.set('strictQuery', true);
 
 //for the grades for each course
 const courseforGradeSchema = new mongoose.Schema({
@@ -95,12 +98,19 @@ const userSchema = new mongoose.Schema({
     password: String,
 })
 
+userSchema.methods.generateAuthToken = function () {
+	const token = jwt.sign({ _id: this._id }, JWTPRIVATEKEY, {
+		expiresIn: "7d",
+	});
+	return token;
+};
+
 const User = mongoose.model("User", userSchema)
 
 
 app.post("/auth", async function (req, res){
 	try {
-		const { error } = validate(req.body);
+		const { error } = validateLogin(req.body);
 		if (error)
 			return res.status(400).send({ message: error.details[0].message });
 
@@ -113,9 +123,11 @@ app.post("/auth", async function (req, res){
 			user.password
 		);
 		if (!validPassword)
-			return res.status(401).send({ message: "Invalid Email or Password" });
-
+			return res.status(401).send({ message: "Invalid Password" });
+        
+        console.log("User verified")
 		const token = user.generateAuthToken();
+        console.log("Generated auth token")
 		res.status(200).send({ data: token, message: "logged in successfully" });
 	} catch (error) {
 		res.status(500).send({ message: "Internal Server Error" });
@@ -125,7 +137,7 @@ app.post("/auth", async function (req, res){
 app.post("/reg", async (req, res) => {
     console.log(req.body.email)
 	try {
-		const { error } = validate(req.body);
+		const { error } = validateReg(req.body);
 		if (error)
 			return res.status(400).send({ message: error.details[0].message });
 
@@ -137,7 +149,6 @@ app.post("/reg", async (req, res) => {
 		const salt = await bcrypt.genSalt(Number(process.env.SALT));
 		const hashPassword = await bcrypt.hash(req.body.password, salt);
         const emailAddr = req.body.email
-        console.log(hashPassword)
         console.log("Password salted and email ready for entering into database!")
         const obj = new User({email: emailAddr, password: hashPassword})
         obj.save(function (err) {
@@ -149,11 +160,19 @@ app.post("/reg", async (req, res) => {
 	}
 });
 
-const validate = (data) => {
+const validateReg = (data) => {
 	const schema = Joi.object({
 		email: Joi.string().email().required().label("Email"),
 		password: Joi.string().required().label("Password"),
         confirm: Joi.string().required().label("Confirm")
+	});
+	return schema.validate(data);
+};
+
+const validateLogin = (data) => {
+	const schema = Joi.object({
+		email: Joi.string().email().required().label("Email"),
+		password: Joi.string().required().label("Password"),
 	});
 	return schema.validate(data);
 };

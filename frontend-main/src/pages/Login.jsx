@@ -1,23 +1,44 @@
 import React, { useEffect, useState } from 'react'
 import {Link, useNavigate } from "react-router-dom";
+import axios from 'axios';
 import './Login.css';
-
 
 const Login = () => {
     const [data, setData] = useState({ email: "", password: ""})
     const [error, setError] = useState("")
+	const handleChange = ({ currentTarget: input }) => {
+		setData({ ...data, [input.name]: input.value });
+	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			const url = "http://localhost:8000/auth";
+			const { data: res } = await axios.post(url, data);
+			localStorage.setItem("token", res.data);
+			window.location = "/";
+		} catch (error) {
+			if (
+				error.response &&
+				error.response.status >= 400 &&
+				error.response.status <= 500
+			) {
+				setError(error.response.data.message);
+			}
+		}
+	};
     return(
         <>
             <div className="login_container">
                 <div className="login_form_container">
                     <div className="left">
-                        <form className="form_container" onSubmit="">
+                        <form className="form_container" onSubmit={handleSubmit}>
                             <h1 class="padding_bottom">Login to Your Account</h1>
                             <input
                                 type="email"
                                 placeholder="Email"
                                 name="email"
-                                onChange=""
+                                onChange={handleChange}
                                 value={data.email}
                                 required
                                 className="input"
@@ -26,7 +47,7 @@ const Login = () => {
                                 type="password"
                                 placeholder="Password"
                                 name="password"
-                                onChange={""}
+                                onChange={handleChange}
                                 value={data.password}
                                 required
                                 className="input"
