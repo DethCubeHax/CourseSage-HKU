@@ -18,14 +18,75 @@ import "./Navbar.css";
 import Dropdown from "react-bootstrap/Dropdown"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import verifyUser from "../scripts/VerifyUser";
+import axios from 'axios';
+import { MdVerified } from "react-icons/md";
+import { useState, useEffect } from 'react';
+import { UpdateModeEnum } from "chart.js";
+
+
 
 export default function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const onButtonClick = () => {
-    // window.open(Shubham_Verma_Resume);
+  const [verified, verfificationSetter] = useState("")
+  const data = async () => {
+    const data = await verifyUser();
+    verfificationSetter(data);
   }
+  useEffect(() => {
+    data();
+  }, [])
+
+  
+  const LoginButton = () => {
+    if (verified){
+      console.log("Verification status: " + verified)
+      if (verified === "Verified")
+      {
+        return(<div>
+                  <Button
+            backgroundColor="#f44336"
+            _hover={{ bg: "#ff7961", color: "black" }}
+            color="white"
+            variant="solid"
+            onClick={""}
+            size={["sm", "md"]}
+            id="resumeBtn"
+          >
+            <a href="/logout">
+              Logout
+            </a>
+          </Button>
+        </div>
+  )
+      }
+      else{return(      <Button
+        backgroundColor="#89CBF3"
+        _hover={{ bg: "#89B3F3", color: "black" }}
+        color="white"
+        variant="solid"
+        onClick={onButtonClick}
+        size={["sm", "md"]}
+        download="Shubham_Verma_Resume"
+        id="resumeBtn"
+      >
+        <a href="/login">
+          Login/Register
+        </a>
+      </Button>)
+  
+      }
+    }
+    else{
+      return (<div>Loading</div>)
+    }
+    }
+
+
+  function onButtonClick() {
+
+  }
+
   return (
   
     <div id="navFix">
@@ -201,8 +262,21 @@ export default function Navbar() {
               {/* <Button onClick={toggleColorMode}>
                 {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
               </Button> */}
-
-              <Button
+              {/* { verifyUser()==="Verified" ? (<Button
+                backgroundColor="#89CBF3"
+                _hover={{ bg: "#89B3F3", color: "black" }}
+                color="white"
+                variant="solid"
+                onClick={sessionStorage.removeItem('token')}
+                size={["sm", "md"]}
+                download="Shubham_Verma_Resume"
+                id="resumeBtn"
+              >
+                <a href="/">
+                  Logout
+                </a>
+              </Button>) :
+              (<Button
                 backgroundColor="#89CBF3"
                 _hover={{ bg: "#89B3F3", color: "black" }}
                 color="white"
@@ -215,7 +289,10 @@ export default function Navbar() {
                 <a href="/login">
                   Login/Register
                 </a>
-              </Button>
+              </Button>) } */}
+              <LoginButton></LoginButton>
+
+
             </Stack>
           </Flex>
         </Flex>

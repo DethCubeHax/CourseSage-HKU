@@ -160,8 +160,26 @@ app.post("/reg", async (req, res) => {
 	}
 });
 
-app.post("/verify", async (req, res) => {
+app.post("/verify", async function(req, res){
     console.log(req.body.token)
+    if (req.body.token == null)
+    {
+        console.log("User isn't logged in")
+        return res.status(403).send({message: "User not logged in"});
+    }
+    else{
+        const token = req.body.token;
+        jwt.verify(token, JWTPRIVATEKEY, (err) => {
+            if (err) {
+                console.log("User is not verified");
+                return res.status(403).send({message: "Forbidden"});
+            }
+            else {
+                console.log("Verified")
+                return res.status(200).send({message: "Verified"});
+            }
+        })
+    }
 })
 
 const validateReg = (data) => {
