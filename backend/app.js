@@ -160,6 +160,10 @@ app.post("/reg", async (req, res) => {
 	}
 });
 
+app.post("/verify", async (req, res) => {
+    console.log(req.body.token)
+})
+
 const validateReg = (data) => {
 	const schema = Joi.object({
 		email: Joi.string().email().required().label("Email"),

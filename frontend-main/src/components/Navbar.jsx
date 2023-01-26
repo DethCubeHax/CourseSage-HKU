@@ -17,6 +17,7 @@ import "./Navbar.css";
 // import Shubham_Verma_Resume from "./Shubham_Verma_Resume.pdf";
 import Dropdown from "react-bootstrap/Dropdown"
 import 'bootstrap/dist/css/bootstrap.min.css';
+import verifyUser from "../scripts/VerifyUser";
 
 export default function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -25,8 +26,8 @@ export default function Navbar() {
   const onButtonClick = () => {
     // window.open(Shubham_Verma_Resume);
   }
-
   return (
+  
     <div id="navFix">
       <Box
         bg={useColorModeValue("gray.100", "gray.900")}
@@ -212,21 +213,8 @@ export default function Navbar() {
                 id="resumeBtn"
               >
                 <a href="/login">
-                  {/* // href={Shubham_Verma_Resume}
-                  // target="_blank"
-                  // download="Shubham_Verma_Resume" */}
-                
                   Login/Register
                 </a>
-                {/* <Link
-                    id="navRes"
-                    href={Shubham_Verma_Resume}
-                    target="_blank"
-                    style={{ textDecoration: "none", color: "white" }}
-                    download="Shubham_Verma_Resume"
-                  >
-                    RESUME
-                  </Link> */}
               </Button>
             </Stack>
           </Flex>
