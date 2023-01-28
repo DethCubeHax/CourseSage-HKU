@@ -15,6 +15,7 @@ const Login = () => {
 		try {
 			const url = "http://localhost:8000/auth";
 			const { data: res } = await axios.post(url, data);
+            console.log("RECEIVED TOKEN: " + res.data)
 			sessionStorage.setItem("token", res.data);
 			window.location = "/";
 		} catch (error) {

@@ -1,0 +1,59 @@
+.cartDiv{
+    flex-direction: row;
+    /* justify-content: baseline; */
+    box-shadow: 0 0px 3.5px 0 rgba(0, 0, 0, 0.5);
+    width: 80%;
+    /* margin: auto; */
+    margin-left: 40px;
+    border-radius: 1rem;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.cartTitle{
+    font-weight: bold;
+    font-size:25px;
+}
+
+.courseTitle{
+    font-weight: bold;
+    font-size: large;
+    border-bottom: 1px black solid;
+    margin-bottom: 5px;
+}
+
+.red_btn{
+	border: none;
+	outline: none;
+	padding: 10px 0;
+	background-color: white;
+	border-radius: 15px;
+	width: 150px;
+	font-weight: bold;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+.red_btn {
+    background-color: #ef4e6e;
+    color: white;
+    margin: 5px;
+    font-size: 13px;
+    transition: 0.5s;
+}
+
+.red_btn:hover{
+    background-color: #ec8197;
+    transition: 0.5s;
+}
+
+.average{
+    width: 72%;
+    /* margin: auto; */
+    border-top: 1px black solid;
+    margin-left: 55px;
+    margin-top:40px;
+    
+    font-weight: bold;
+    font-size: 25px;
+}

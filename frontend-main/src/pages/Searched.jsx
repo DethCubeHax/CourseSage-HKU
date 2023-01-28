@@ -8,6 +8,7 @@ import RevCard from '../components/RevCard';
 import CourseGradePage from './CourseGradePage';
 import Axios from "axios";
 import ReactPaginate from 'react-paginate';
+import Cart from '../components/Cart';
 import "./Home.css";
 
 const PER_PAGE = 10;
@@ -51,9 +52,9 @@ function Searched() {
   }
 
   return (
-
     <div>
-        <div>
+    <div style={{display:"flex"}}>
+        <div style={{flex:"70%"}}>
             <DetailWrapper>
                 {/* <div className="button-div" style={{paddingBottom: "40px"}}>
                     <p style={{marginRight: "2rem", marginTop: "8px"}}>Sort Courses:</p>     
@@ -149,6 +150,10 @@ function Searched() {
                     } */}
                 </div>
             </DetailWrapper>
+        </div>
+        <div style={{flex:"30%"}}>
+            <Cart></Cart>
+        </div>
         </div>
         <div className='container'>
         <ReactPaginate

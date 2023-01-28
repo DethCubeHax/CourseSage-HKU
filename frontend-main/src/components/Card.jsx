@@ -1,24 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from './Chart';
 import "./Card.css"
 import Modal from '../pages/Modal';
 import CourseReviewPage from '../pages/CourseReviewPage';
 import CourseGradePage from '../pages/CourseGradePage';
+import { IconButton } from '@chakra-ui/react';
+import verifyUser from '../scripts/VerifyUser';
+import addCourse from '../scripts/AddCourse';
+import { PlusSquareIcon } from '@chakra-ui/icons';
 
 
 function Card(props) {
+    const [verified, verificationSetter] = useState("");
+    const data = async () => {
+        const data = await verifyUser();
+        verificationSetter(data);
+    }
+
+    useEffect(() => {
+        data();
+    }, [])
     // const instructors = props.instructors;
     // console.log("instructors are: ")
     // console.log(props)
     // console.log(instructors)
+    const AddCourseButton = () => {
+        if (verified==="Verified")
+        {
+            return(
+                <IconButton
+                background="white"
+                border="1px"
+                borderColor="#bfbfbf"
+                borderRadius="15px"
+                height="50px"
+                width="50px"
+                size={"lg"}
+                transition="0.5s"
+                onClick={()=>{addCourse(props); window.location.reload(false)}}
+                icon={<PlusSquareIcon/>}
+            />
+            )
+        }
+        else{
+            return(
+                <div></div>
+            )
+        }
+    }
 
     const [openModal, setOpenModal] = useState(false);
   
     return (
-    
-    <div className="optimus" onClick={() => setOpenModal(true)}>
-
-
+    <div style={{display:"flex"}}>
+        <div style={{flex:"95%"}}>
+        <div className="optimus" onClick={() => setOpenModal(true)}>
         <CourseGradePage 
         open={openModal} 
         onClose={() => setOpenModal(false)}
@@ -49,6 +85,14 @@ function Card(props) {
                 props={props} />
             </div>
         </div>
+    </div>
+        </div>
+
+    <div style={{flex:"5%"}}>
+        <div>
+            <AddCourseButton></AddCourseButton>
+        </div>
+    </div>
     </div>
   )
 }

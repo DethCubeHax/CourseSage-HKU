@@ -22,6 +22,7 @@ const assert = require('assert');
 
 const mongoose = require('mongoose');
 const { join } = require("path");
+const { Console } = require("console");
 mongoose.connect('mongodb://localhost:27017/richku2',{useNewURLParser: true});
 mongoose.set('strictQuery', true);
 
@@ -107,6 +108,12 @@ userSchema.methods.generateAuthToken = function () {
 
 const User = mongoose.model("User", userSchema)
 
+const cartSchema = new mongoose.Schema({
+    id: String,
+    courseCode: String
+})
+
+const Cart = mongoose.model("Cart", cartSchema)
 
 app.post("/auth", async function (req, res){
 	try {
@@ -162,25 +169,18 @@ app.post("/reg", async (req, res) => {
 
 app.post("/verify", async function(req, res){
     console.log(req.body.token)
-    if (req.body.token == null)
-    {
-        console.log("User isn't logged in")
-        return res.status(403).send({message: "User not logged in"});
-    }
-    else{
-        const token = req.body.token;
-        jwt.verify(token, JWTPRIVATEKEY, (err) => {
-            if (err) {
-                console.log("User is not verified");
-                return res.status(403).send({message: "Forbidden"});
-            }
-            else {
-                console.log("Verified")
-                return res.status(200).send({message: "Verified"});
-            }
-        })
-    }
+    const token = req.body.token;
+    jwt.verify(token, JWTPRIVATEKEY, (err) => {
+        if (err) {
+            return res.status(403).send({message: "Forbidden"});
+        }
+        else {
+            return res.status(200).send({message: "Verified"});
+        }
+    })
 })
+
+
 
 const validateReg = (data) => {
 	const schema = Joi.object({
@@ -198,6 +198,91 @@ const validateLogin = (data) => {
 	});
 	return schema.validate(data);
 };
+
+app.post("/addCourse", async function(req, res){
+    if (req.body.token == null){
+        return res.status(403).send({message: "User not logged in"});
+    }
+    else{
+        const decodedData = jwt.verify(req.body.token, JWTPRIVATEKEY);
+        const data = await Cart.find({ id: decodedData._id });
+        let count = 0;
+        for (var item of data){
+            if (item.courseCode === req.body.title){
+                return res.status(200).send({message: "This course already exists"})
+            }
+            count++;
+            if (count >= 6){
+                return res.status(200).send({message: "Maximum number of courses added"})
+            }
+        }
+    
+        const obj = new Cart({id:decodedData._id, courseCode:req.body.title});
+        obj.save();
+        console.log("Added course " + req.body.title + " to user <" + decodedData._id + ">'s cart")
+        return res.status(200).send({message: "Course added to the cart"})
+    }
+})
+
+app.post("/removeCourse", async function(req, res){
+    if (req.body.token == null){
+        return res.status(403).send({message: "User not logged in"});
+    }
+    const decodedData = jwt.verify(req.body.token, JWTPRIVATEKEY);
+    console.log("PURGING COURSE " + req.body.title + " for user " + decodedData._id)
+    const items = await Cart.find({id:decodedData._id})
+    for (var item of items){
+        if (item.courseCode===req.body.title){
+            Cart.findByIdAndDelete(item._id, function(err, docs){
+                if(err){
+                    console.log("Error: " + err)
+                }
+                else{
+                    console.log(docs)
+                }
+            })
+        }
+    }
+})
+
+app.post("/getCartData", async function (req, res) {
+    if (req.body.token == null){
+        return res.status(403).send({message: "User not logged in"});
+    }
+    const decodedData = jwt.verify(req.body.token, JWTPRIVATEKEY);
+    const userData = await Cart.find({ id:decodedData._id });
+    let sentData=[]
+    for (var item of userData){
+        const courseData = await Grade.findOne({courseCode: item.courseCode})
+        const grades = courseData.gradeListDetailed
+        let count = 0;
+        let MAXGPA = 4.3;
+        let GPA = 0;
+        for (var grade of grades){
+            count+=grade;
+            GPA += grade * MAXGPA;
+            MAXGPA -= 0.3;
+        }
+        GPA = GPA/count;
+        courseInfo = {
+            courseCode: item.courseCode,
+            gpa: GPA
+        }
+        sentData.push(courseInfo)
+    }
+    let count = 0;
+    let GPA = 0;
+    for (var item of sentData)
+    {
+        GPA+=item.gpa;
+        count++
+    }
+    if (GPA!=0){
+        sentData.push({courseCode: "AVERAGE", gpa:GPA/count})
+    }
+    
+    return res.status(200).send({data:sentData})
+})
 
 app.get("/FBE" , function (req,res) {
     Master.findOne({facultyName: "Faculty of Business and Economics"}, function(err,foundList) {

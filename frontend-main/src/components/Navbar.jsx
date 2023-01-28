@@ -45,7 +45,7 @@ export default function Navbar() {
       {
         return(<div>
                   <Button
-            backgroundColor="#f44336"
+            backgroundColor="#ef4e6e"
             _hover={{ bg: "#ff7961", color: "black" }}
             color="white"
             variant="solid"

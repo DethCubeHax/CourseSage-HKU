@@ -2,7 +2,7 @@
     flex-direction: row;
     /* justify-content: baseline; */
     box-shadow: 0 0px 3.5px 0 rgba(0, 0, 0, 0.5);
-    width: 70%;
+    width: 96%;
     /* margin: auto; */
     margin-left: 40px;
     border-radius: 1rem;
@@ -10,11 +10,16 @@
     margin-bottom: 15px;
 }
 
-.leftcol {
-    /* display: flex;
-    justify-content: space-between; */
-    /* margin-right: 60px; */
 
+.left_col {
+    flex-direction: column;
+    width:95%
+
+}
+
+.right_col {
+    flex-direction: column;
+    width: 5%
 }
 
 .barchart {
@@ -25,3 +30,34 @@
     height: 250px;
 }
 
+.white_btn,
+.green_btn,
+.blue_btn {
+	border: none;
+	outline: none;
+	padding: 12px 0;
+	background-color: white;
+	border-radius: 15px;
+	width: 180px;
+	font-weight: bold;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+.green_btn {
+	background-color: #3bb19b;
+	color: white;
+	margin: 10px;
+}
+.blue_btn {
+    transition: 0.5s;
+    background-color: #89CBF3;
+    color: white;
+    margin: 10px;
+    font-size: 20px;
+}
+
+.blue_btn:hover {
+    transition: 0.5s;
+    background-color: blue;
+}

@@ -9,6 +9,7 @@ import CourseGradePage from './CourseGradePage';
 import Axios from "axios";
 import ReactPaginate from 'react-paginate';
 import "./Home.css";
+import Cart from "../components/Cart"
 
 const PER_PAGE = 10;
 
@@ -51,80 +52,95 @@ function Home() {
                     <Button className={activeTab === "by-grades" ? "active" : ""} onClick={() => setActiveTab("by-grades")}>By Best Graded Courses</Button>
                     <Button className={activeTab === "by-reviews" ? "active" : ""} onClick={() => setActiveTab("by-reviews")}>By Best Reviews/Least Workload</Button>
                 </div>
-                <div className="fac-name" style={{fontSize: "28px", fontWeight: "bold", padding: "20px", marginLeft: "30px"}}>
-                    Faculty of Business and Economics
+                <div style={{display:"flex"}}>
+                    <div style={{flex:"65%"}}>
+                        <div className="fac-name" style={{fontSize: "28px", fontWeight: "bold", padding: "20px", marginLeft: "30px"}}>
+                            Faculty of Business and Economics
+                        </div>
+                            {activeTab === "by-grades" &&
+                                data2 && 
+                                    data2.sortedByGrades
+                                    .slice(offset, offset + PER_PAGE)
+                                    .map((course1) => {
+
+                                        let courseGrades = course1.gradeList;
+                                        if (courseGrades === null) {
+                                            courseGrades = [0,0,0,0,0]
+                                        }
+
+                                        let courseGradesDetailed = course1.gradeListDetailed;
+                                        if (courseGradesDetailed === null) {
+                                            courseGradesDetailed = [0,0,0,0,0,0,0,0,0,0,0,0,0]
+                                        }
+
+                                        let review = course1.bestReview;
+                                        if (review !== null) {
+                                            review = review[4]
+                                        }
+                                        const capitalizeWords = (str) => {
+                                            return str
+                                            .toLowerCase()
+                                            .split(' ' || ' (')
+                                            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                                            .join(' ');
+                                        };
+                                        let courseName1 = capitalizeWords(course1.courseName);
+                                        
+                                        return (
+                                            <Card 
+                                                courseCode={course1.courseCode}
+                                                courseName={courseName1}
+                                                instructors={course1.courseInstructor}
+                                                bestRev={review}
+                                                gradeList={courseGrades}
+                                                gradeListDetailed={courseGradesDetailed}
+                                            />
+                                        )
+                                })
+        
+                            }
+                            {
+                                activeTab === "by-reviews" && 
+                                    data2 &&
+                                        data2.sortedByReviews
+                                        .slice(offset, offset + PER_PAGE)
+                                        .map((course) => {
+
+                                        const capitalizeWords = (str) => {
+                                            return str
+                                            .toLowerCase()
+                                            .split(' ' || ' (')
+                                            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                                            .join(' ');
+                                        };
+                                        let courseName1 = capitalizeWords(course.courseName);
+                                            return (
+
+                                                <RevCard 
+                                                    courseCode={course.courseCode}
+                                                    courseName={courseName1}
+                                                    reviewRanges={course.reviewRanges}
+                                                    allReviews={course.allReviews}
+                                                />
+
+                                            )
+                                        }) 
+                            }
+                    </div>
+                    
+                    
+                    <div style={{flex: "35%"}}>
+                        <div>
+                            <div className="fac-name" style={{fontSize: "28px", fontWeight: "bold", padding: "20px", marginLeft: "30px"}}>
+                                Course Basket
+                            </div>
+                            <div>
+                                <Cart></Cart>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    {activeTab === "by-grades" &&
-                        data2 && 
-                            data2.sortedByGrades
-                            .slice(offset, offset + PER_PAGE)
-                            .map((course1) => {
 
-                                let courseGrades = course1.gradeList;
-                                if (courseGrades === null) {
-                                    courseGrades = [0,0,0,0,0]
-                                }
-
-                                let courseGradesDetailed = course1.gradeListDetailed;
-                                if (courseGradesDetailed === null) {
-                                    courseGradesDetailed = [0,0,0,0,0,0,0,0,0,0,0,0,0]
-                                }
-
-                                let review = course1.bestReview;
-                                if (review !== null) {
-                                    review = review[4]
-                                }
-                                const capitalizeWords = (str) => {
-                                    return str
-                                    .toLowerCase()
-                                    .split(' ' || ' (')
-                                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                                    .join(' ');
-                                };
-                                let courseName1 = capitalizeWords(course1.courseName);
-                                
-                                return (
-                                    <Card 
-                                        courseCode={course1.courseCode}
-                                        courseName={courseName1}
-                                        instructors={course1.courseInstructor}
-                                        bestRev={review}
-                                        gradeList={courseGrades}
-                                        gradeListDetailed={courseGradesDetailed}
-                                    />
-                                )
-                        })
- 
-                    }
-                    {
-                        activeTab === "by-reviews" && 
-                            data2 &&
-                                data2.sortedByReviews
-                                .slice(offset, offset + PER_PAGE)
-                                .map((course) => {
-
-                                const capitalizeWords = (str) => {
-                                    return str
-                                    .toLowerCase()
-                                    .split(' ' || ' (')
-                                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                                    .join(' ');
-                                };
-                                let courseName1 = capitalizeWords(course.courseName);
-                                    return (
-
-                                        <RevCard 
-                                            courseCode={course.courseCode}
-                                            courseName={courseName1}
-                                            reviewRanges={course.reviewRanges}
-                                            allReviews={course.allReviews}
-                                        />
-
-                                    )
-                                }) 
-                    }
-                </div>
             </DetailWrapper>
         </div>
         <div className='container'>
