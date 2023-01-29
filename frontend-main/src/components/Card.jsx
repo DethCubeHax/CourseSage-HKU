@@ -32,6 +32,7 @@ function Card(props) {
                 background="white"
                 border="1px"
                 borderColor="#bfbfbf"
+                boxShadow="0 0px 3.5px 0 rgba(0,0,0,0.5)"
                 borderRadius="15px"
                 height="50px"
                 width="50px"
@@ -53,16 +54,16 @@ function Card(props) {
   
     return (
     <div style={{display:"flex"}}>
-        <div style={{flex:"95%", background:"red"}}>
-        <div className="optimus" onClick={() => setOpenModal(true)}>
+        {/* <div style={{flex:"70%", background:"red"}}> */}
+        <div className="optimusc" onClick={() => setOpenModal(true)}>
         <CourseGradePage 
         open={openModal} 
         onClose={() => setOpenModal(false)}
         props={props} />
 
 
-        <div className="master">
-            <div className="leftcol">
+        <div className="masterc">
+            <div className="leftcolc">
                 <h1 style={{fontSize: "22px", fontWeight: "bold"}}>
                     {props.courseCode}: {props.courseName}
                 </h1>
@@ -80,19 +81,19 @@ function Card(props) {
                 </div>
             </div>
 
-            <div className="barchart">
+            <div className="barchartc">
                 <Chart 
                 props={props} />
             </div>
         </div>
     </div>
-        </div>
+        {/* </div> */}
 
-    <div style={{flex:"5%", background:"blue"}}>
-        <div>
-            <AddCourseButton></AddCourseButton>
-        </div>
+
+    <div style={{marginLeft: "4px"}}>
+        <AddCourseButton></AddCourseButton>
     </div>
+
     </div>
   )
 }

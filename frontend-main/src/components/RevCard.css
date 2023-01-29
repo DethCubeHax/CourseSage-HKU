@@ -1,8 +1,8 @@
 .master {
-    flex-direction: row;
+    display: flex;
     /* justify-content: baseline; */
     box-shadow: 0 0px 3.5px 0 rgba(0, 0, 0, 0.5);
-    width: 96%;
+    width: 130vh;
     /* margin: auto; */
     margin-left: 40px;
     border-radius: 1rem;
@@ -26,7 +26,7 @@
     /* display: flex;
     justify-content: space-between; */
     padding-top: 30px;
-    width: 50%;
+    width: 30%;
     height: 250px;
 }
 

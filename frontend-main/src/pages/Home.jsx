@@ -116,7 +116,7 @@ function Home() {
                                         let courseName1 = capitalizeWords(course.courseName);
                                             return (
 
-                                                <RevCard 
+                                                <RevCard
                                                     courseCode={course.courseCode}
                                                     courseName={courseName1}
                                                     reviewRanges={course.reviewRanges}
@@ -129,7 +129,7 @@ function Home() {
                     </div>
                     
                     
-                    <div style={{flex: "35%"}}>
+                    <div style={{width: "35%"}}>
                         <div>
                             <div className="fac-name" style={{fontSize: "28px", fontWeight: "bold", padding: "20px", marginLeft: "30px"}}>
                                 Course Basket

@@ -158,7 +158,7 @@ function Faculty() {
                     </div>
                 </DetailWrapper>  
             </div>
-            <div style={{flex:"30%"}}>
+            {/* <div style={{flex:"30%"}}>
                 <div className="fac-name" style={{fontSize: "28px", fontWeight: "bold", padding: "20px", marginLeft: "30px"}}>
                                 Course Basket
                 </div>
@@ -166,7 +166,18 @@ function Faculty() {
                     <Cart></Cart>
                 </div>
                 
-            </div>              
+            </div>   */}
+                    <div style={{width: "32%"}}>
+                        <div>
+                            <div className="fac-name" style={{fontSize: "28px", fontWeight: "bold", padding: "20px", marginLeft: "30px"}}>
+                                Course Basket
+                            </div>
+                            <div>
+                                <Cart></Cart>
+                            </div>
+                        </div>
+                    </div>
+            
         </div>
         <div className='container'>
             <ReactPaginate
