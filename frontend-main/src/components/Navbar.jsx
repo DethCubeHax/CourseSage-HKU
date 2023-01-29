@@ -26,6 +26,7 @@ import { UpdateModeEnum } from "chart.js";
 
 
 export default function Navbar() {
+
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [verified, verfificationSetter] = useState("")
@@ -36,6 +37,11 @@ export default function Navbar() {
   useEffect(() => {
     data();
   }, [])
+
+  const logout = () => {
+    sessionStorage.removeItem("token")
+    window.location = "/";
+  }
 
   
   const LoginButton = () => {
@@ -49,13 +55,13 @@ export default function Navbar() {
             _hover={{ bg: "#ff7961", color: "black" }}
             color="white"
             variant="solid"
-            onClick={""}
+            onClick={()=>logout()}
             size={["sm", "md"]}
             id="resumeBtn"
           >
-            <a href="/logout">
+            <div>
               Logout
-            </a>
+            </div>
           </Button>
         </div>
   )

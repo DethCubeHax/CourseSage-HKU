@@ -43,7 +43,7 @@ function CourseReviewPage() {
   };
   return (
    
-    <div style={{display: "flex"}}>
+    <div style={{}}>
      {data2 && 
       <div>
         <h1 style={{fontSize: "25px", fontWeight: "bold", paddingLeft: "30px"}}>{data2.courseCode}: {capitalizeWords(data2.courseName)}</h1>

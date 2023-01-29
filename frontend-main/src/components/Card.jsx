@@ -53,7 +53,7 @@ function Card(props) {
   
     return (
     <div style={{display:"flex"}}>
-        <div style={{flex:"95%"}}>
+        <div style={{flex:"95%", background:"red"}}>
         <div className="optimus" onClick={() => setOpenModal(true)}>
         <CourseGradePage 
         open={openModal} 
@@ -88,7 +88,7 @@ function Card(props) {
     </div>
         </div>
 
-    <div style={{flex:"5%"}}>
+    <div style={{flex:"5%", background:"blue"}}>
         <div>
             <AddCourseButton></AddCourseButton>
         </div>

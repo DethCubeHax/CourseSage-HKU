@@ -46,9 +46,9 @@ function RevCard(props) {
         }
     }
     return (
-    <div>
     <div style={{display:"flex"}}>
-        <div style={{flex:"50%"}}>
+        <div style={{flex:"95%", background:"red"}}>
+            <div>
             <Link to={"/courses/reviews/"+props.courseCode} state={{ props: props }}>
                 <div className="master">
                     <div className="leftcol" style={{width: "30%"}}>
@@ -92,19 +92,15 @@ function RevCard(props) {
                         <DoughnutGraph reviewRanges={props.reviewRanges} />
                     </div>
                 </div>
-                <div className='slave'>
-
-                </div>
             </Link>
+            </div>
         </div>
 
-        <div style={{flex:"50%"}}>
+        <div style={{flex:"5%", background:"blue"}}>
             <div>
                 <AddCourseButton></AddCourseButton>
             </div>
         </div>
-    </div>
-        
     </div>
 
   )
