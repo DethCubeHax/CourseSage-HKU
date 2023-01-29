@@ -56,44 +56,43 @@ function Card(props) {
     <div style={{display:"flex"}}>
         {/* <div style={{flex:"70%", background:"red"}}> */}
         <div className="optimusc" onClick={() => setOpenModal(true)}>
-        <CourseGradePage 
-        open={openModal} 
-        onClose={() => setOpenModal(false)}
-        props={props} />
+            <CourseGradePage 
+            open={openModal} 
+            onClose={() => setOpenModal(false)}
+            props={props} />
 
 
-        <div className="masterc">
-            <div className="leftcolc">
-                <h1 style={{fontSize: "22px", fontWeight: "bold"}}>
-                    {props.courseCode}: {props.courseName}
-                </h1>
-                <div style={{paddingLeft: "30px",fontSize: "14px", paddingTop: "10px"}}>
-                    {props.instructors.map((instructor) => {
-                        return (
-                            <p>{instructor}</p>
-                        )
-                    })}
-                    {/* {props.instructors} */}
+            <div className="masterc">
+                <div className="leftcolc">
+                    <h1 style={{fontSize: "22px", fontWeight: "bold"}}>
+                        {props.courseCode}: {props.courseName}
+                    </h1>
+                    <div style={{paddingLeft: "30px",fontSize: "14px", paddingTop: "10px"}}>
+                        {props.instructors.map((instructor) => {
+                            return (
+                                <p>{instructor}</p>
+                            )
+                        })}
+                        {/* {props.instructors} */}
+                    </div>
+                    <div style={{paddingLeft: "30px", paddingTop: "8px", fontSize: "12px", width: "400px"}}>
+                        <div style={{fontSize: "18px", fontWeight: "bold"}}>Best Review:</div> 
+                        <p style={{fontSize: "14px"}}>{props.bestRev}</p>
+                    </div>
                 </div>
-                <div style={{paddingLeft: "30px", paddingTop: "8px", fontSize: "12px", width: "400px"}}>
-                    <div style={{fontSize: "18px", fontWeight: "bold"}}>Best Review:</div> 
-                    <p style={{fontSize: "14px"}}>{props.bestRev}</p>
-                </div>
-            </div>
 
-            <div className="barchartc">
-                <Chart 
-                props={props} />
+                <div className="barchartc">
+                    <Chart 
+                    props={props} />
+                </div>
             </div>
         </div>
-    </div>
         {/* </div> */}
 
 
-    <div style={{marginLeft: "4px"}}>
-        <AddCourseButton></AddCourseButton>
-    </div>
-
+        <div style={{marginLeft: "4px"}}>
+            <AddCourseButton></AddCourseButton>
+        </div>
     </div>
   )
 }

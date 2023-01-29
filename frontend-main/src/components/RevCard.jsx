@@ -88,12 +88,11 @@ function RevCard(props) {
             </Link>
             </div>
         {/* </div> */}
-{/* 
-        <div style={{flex:"5%", background:"blue"}}> */}
+
             <div style={{marginLeft: "4px"}}>
                 <AddCourseButton></AddCourseButton>
             </div>
-        {/* </div> */}
+
     </div>
 
   )
