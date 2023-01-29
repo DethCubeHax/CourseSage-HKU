@@ -67,7 +67,7 @@ function RevCard(props) {
                 </div>
                    
 
-                <div style={{width: "30%", paddingLeft: "150px", fontSize: "12px", paddingTop: "50px", paddingRight: "30px"}}>
+                <div style={{width: "40%", paddingLeft: "150px", fontSize: "12px", paddingTop: "50px", paddingRight: "30px"}}>
 
                     <p style={{fontSize: "15px", fontWeight: "bold", paddingTop: "13px"}}>Number of reviews:</p>
                     <ul>
