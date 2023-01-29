@@ -79,7 +79,7 @@ function RevCard(props) {
                     </ul>
                 </div>
                     
-                    <div className="barchart">
+                    <div className="barchart" style={{width: "30%"}}>
                         {/* <AreaChart /> */}
                         <DoughnutGraph reviewRanges={props.reviewRanges} />
                     </div>

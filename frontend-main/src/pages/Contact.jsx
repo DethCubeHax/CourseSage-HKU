@@ -6,7 +6,7 @@ const ContactPage = () => {
     return(
         <div>
 
-            <div className="master">
+            <div className="masterc1">
                 <div className="left">
                     <div className="title">This website was developed by the blood, sweat and tears of</div>
                     <div className="slave">

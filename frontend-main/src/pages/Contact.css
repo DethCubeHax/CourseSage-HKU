@@ -1,57 +1,57 @@
-.master {
-    display:flex;
+.masterc1 {
+    display: flex;
     /* justify-content: baseline; */
     box-shadow: 0 0px 3.5px 0 rgba(0, 0, 0, 0.5);
     /* margin: auto; */
     align-items: center;
     border-radius: 1rem;
-    width:95%;
+    width: 95%;
 }
 
-.slave{
-    display:flex;
+.slave {
+    display: flex;
     align-items: center;
     width: 95%;
 
 }
 
-.title{
+.title {
     font-size: 35px;
     font-weight: bold;
     margin-bottom: 25px;
     border-bottom: 1px solid #bfbfbf;
 }
 
-.left{
-    flex:1;
+.left {
+    flex: 1;
 }
 
-.slave .left{
+.slave .left {
     border-right: 1px solid #bfbfbf;
 }
 
-.right{
-    flex:1;
+.right {
+    flex: 1;
     background-color: white;
 }
 
-.devName{
+.devName {
     font-size: 30px;
-    font-weight:bold;
+    font-weight: bold;
     margin-top: 15px;
     margin-bottom: 15px;
 }
 
-.github{
-    display:flex;
+.github {
+    display: flex;
     font-size: 20px;
     margin-top: 25px;
 }
 
-.github .left{
+.github .left {
     border-right: none;
 }
 
-.github .right{
+.github .right {
     flex: 2;
 }

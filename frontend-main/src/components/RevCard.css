@@ -17,10 +17,10 @@
 
 }
 
-.right_col {
+/* .right_col {
     flex-direction: column;
     width: 5%
-}
+} */
 
 .barchart {
     /* display: flex;

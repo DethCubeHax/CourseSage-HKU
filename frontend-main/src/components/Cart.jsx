@@ -35,7 +35,7 @@ const Cart = () => {
             return(
                 <div className='cartText'>
                     <Link to="/register" class="blue_text">Register </Link>or 
-                    <Link to="/login" class="blue_text">Sign in</Link> to your account to see your course cart and estimated GPA!
+                    <Link to="/login" class="blue_text"> Sign in</Link> to your account to see your course cart and estimated GPA!
                 </div>
             )
         }
