@@ -9,6 +9,7 @@ import Searched from './Searched';
 import LoginPage from './Login';
 import RegisterPage from './Register';
 import Logout from './Logout'
+import ContactPage from './Contact'
 
 
 function Pages() {
@@ -24,6 +25,7 @@ function Pages() {
         <Route path="/login" element={<LoginPage/>}/>
         <Route path="/register" element={<RegisterPage/>}/>
         <Route path="/logout" element={<Logout/>}/>
+        <Route path="/contact" element={<ContactPage/>}/>
     </Routes>
   )
 }
