@@ -1,0 +1,64 @@
+
+            <div className="masterc2">
+                <div className="leftc">
+                    <div className="titlec">
+                        <div style={{textAlign:"center"}}>This website was developed by the blood, sweat and tears of</div></div>
+                    <div className="slavec">
+                        <div className="leftc">
+                            <div className="githubc" style={{paddingRight:"30px"}}>
+                                <div className="leftc" style={{flex:2, alignItems:"flex-end"}}>
+                                    <div className="devNamec">
+                                        Wasif Latif Hussain
+                                    </div>
+                                    
+                                    <a style={{textAlign:"right"}} target="_blank" href="https://github.com/wasifcoding/">
+                                        <div style={{display:"flex", flexDirection:"row"}}>
+                                            <div style={{paddingLeft:"15px"}}>wasifcoding</div>
+                                            <FaGithub style={{alignSelf:"flex-end"}}></FaGithub>
+                                        </div>
+                                    </a>
+                                    <a style={{textAlign:"right"}} target="_blank" href="">
+                                        <div style={{display:"flex", maxWidth:"150px"}}>
+                                            <div style={{paddingLeft:"15px"}}>md.wasiflatif9859@gmail.com</div>
+                                            <EmailIcon></EmailIcon>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div className="rightc" style={{flex:1, paddingLeft:"60px"}}>
+                                    <img src="https://avatars.githubusercontent.com/u/114172779?v=4"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="rightc">
+                            <div className="githubc" >
+                                <div className="leftc" style={{paddingRight:"60px"}}>
+                                    <img src="https://avatars.githubusercontent.com/u/57101067?v=4"/>
+                                </div>
+                                <div className="rightc" style={{flex:2, alignItems:"flex-start"}}>
+                                    <div className="devNamec">
+                                        Nafis Ul Islam
+                                    </div>
+                                    
+                                    <a className="githubc" target="_blank" href="https://www.github.com/DethCubeHax">
+                                        <div className="leftc">
+                                        <FaGithub></FaGithub>
+                                        </div>
+                                        <div className="rightc" style={{paddingLeft:"15px"}}>
+                                            DethCubeHax
+                                        </div>
+                                    </a>
+                                    <a className="githubc" href="">
+                                        <div className="leftc">
+                                            <EmailIcon></EmailIcon>
+                                        </div>
+                                        <div className="rightc" style={{paddingLeft:"15px"}}>
+                                            nafisulislam2k2@gmail.com
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>

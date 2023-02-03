@@ -7,7 +7,6 @@ import { CourseBarGraph } from '../components/CourseBarGraph';
 import {MdCancel} from 'react-icons/md';
 
 
-
 const CourseGradePage = ({ open, onClose, props }) => {
   const gradeFull = Array.from(props.gradeListDetailed);
 
