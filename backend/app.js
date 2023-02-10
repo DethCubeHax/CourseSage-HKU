@@ -133,9 +133,13 @@ app.post("/auth", async function (req, res){
 			return res.status(401).send({ message: "Invalid Password" });
         
         console.log("User verified")
-		const token = user.generateAuthToken();
-        console.log("Generated auth token")
-		res.status(200).send({ data: token, message: "logged in successfully" });
+        try {
+            const token = user.generateAuthToken();
+            console.log("Generated auth token")
+            res.status(200).send({ data: token, message: "logged in successfully" });
+        } catch (error) {
+            return res.status(402).send({message: "Session expired"})
+        }
 	} catch (error) {
 		res.status(500).send({ message: "Internal Server Error" });
 	}
