@@ -1,2 +1,8 @@
 /backend/node_modules/**
 /frontend-main/node_modules/**
+/Scraper/data/*.*
+/Scraper/data/reviews/*.*
+/Scraper/data/translatedReviews/*.*
+/Scraper/data/results/*.*
+*.csv
+*.json
