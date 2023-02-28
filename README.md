@@ -1,4 +1,4 @@
-# RICHKU-Parasite
+# GPAid Alpha HKU
 
 Sentiment Analysis:
 Natural Language Processing
