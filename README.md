@@ -1,5 +1,8 @@
 # GPAid Alpha HKU
 
+Regression Model:
+Developed a regression model on the course grades to get a scoring factor and used that factor to sort the courses by best grades to worst grades for each faculty. Used numpy and pandas for dataframe loading and handling data along with JSON and IO to extract data to file systems.
+
 Sentiment Analysis:
 Natural Language Processing
 Used the RoBERTa Model for sentiment analysis of the course reviews based on positivity levels of reviews to get an estimate of the students' sentiment about the course load, course work, grading curvature etc.
