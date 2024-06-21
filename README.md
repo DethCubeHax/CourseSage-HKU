@@ -1,21 +1,58 @@
-# GPAid Alpha HKU
+# 📚 CourseSage HKU
 
-Regression Model:
-Developed a regression model on the course grades to get a scoring factor and used that factor to sort the courses by best grades to worst grades for each faculty. Used numpy and pandas for dataframe loading and handling data along with JSON and IO to extract data to file systems.
+CourseSage HKU is a robust platform designed to assist HKU students in making informed course selections. By aggregating data from various sources, the platform provides detailed insights into course performance, reviews, and more. Below is an overview of its key features and functionalities.
 
-Sentiment Analysis:
-Natural Language Processing
-Used the RoBERTa Model for sentiment analysis of the course reviews based on positivity levels of reviews to get an estimate of the students' sentiment about the course load, course work, grading curvature etc.
-Used the Huggingface Transformers Pipeline along with the Roberta model to tokenize and encode the text.
-The text is decoded and the Roberta model is used to assign scores which are processed using numpy library components.
-Pandas is used to produce a dataframe of course reviews which are stored alongside their respective positivity scores.
-JSON parsing and OS is used to dump the data into csv files for data processing and sorting.
+## Features
 
-Scraping:
-The scraper makes API calls to the server through user login and intercepts the API calls to extract course data from websites alongside user reviews, user scores, course grades and reviews.
+### 📈 Regression Model
+Our regression model analyzes course grades to generate a scoring factor. This factor helps in sorting courses from best to worst grades within each faculty. Key components include:
+- **Data Handling:** Utilized `numpy` and `pandas` for loading and managing data.
+- **Data Extraction:** Employed `JSON` and `IO` to export data to the file system.
 
-Sorting by grades-
-Use of numpy to generate a standardized grading model to produce a grade-factor that mutliplied with grades and average assumed gpa to produce a finalized rating for the course. This rating is used to sort the courses.
+### 🧠 Sentiment Analysis
+CourseSage HKU leverages Natural Language Processing (NLP) to analyze course reviews using the RoBERTa model, estimating student sentiment regarding course load, coursework, grading curves, and more. Highlights include:
+- **Model:** Employed the Huggingface Transformers Pipeline and the RoBERTa model for text tokenization and encoding.
+- **Score Processing:** Used `numpy` for sentiment score processing and `pandas` for generating a dataframe of course reviews with positivity scores.
+- **Data Storage:** Utilized `JSON` parsing and `os` for exporting data into CSV files for further processing and sorting.
 
-Sorting by reviews-
-Used numpy alongside data from sentiment analysis. Used matplotlib to generate graphs and predict data patterns to establish a linkage between reviews and grades and overall course performance to produce a ranking-factor which is multiplied to produce the ranking of the course amongst all the other courses.
+### 🌐 Web Scraping
+The platform includes a scraper that extracts course data, user reviews, scores, and grades by making API calls to the server through user login. It intercepts API calls to collect comprehensive data.
+
+### 📊 Course Sorting
+#### By Grades:
+- Developed a standardized grading model using `numpy` to create a grade-factor.
+- This grade-factor multiplies with grades and average assumed GPA to produce a final course rating for sorting purposes.
+
+#### By Reviews:
+- Combined sentiment analysis data with `numpy` and used `matplotlib` to generate graphs and predict data patterns.
+- Established a linkage between reviews, grades, and overall course performance to create a ranking factor for course sorting.
+
+## 🛠️ Technical Details
+### Libraries and Tools
+- **Data Processing:** `numpy`, `pandas`
+- **NLP:** Huggingface Transformers, RoBERTa Model
+- **Visualization:** `matplotlib`
+- **Data Handling:** `JSON`, `os`
+- **Web Scraping:** Custom API calls interception
+
+### Data Storage
+All processed data is stored in CSV files for easy access and manipulation.
+
+## 💻 Interactive UI
+The platform features an interactive user interface allowing users to sort courses based on various criteria such as grades, reviews, and overall performance. This helps students make informed decisions about their course selections.
+
+## 🚀 Getting Started
+1. **Installation:** Clone the repository and install the necessary dependencies.
+2. **Data Setup:** Run the scraper to collect the latest course data.
+3. **Analysis:** Use the regression model and sentiment analysis features to analyze the data.
+4. **UI Interaction:** Utilize the interactive UI to explore and sort courses.
+
+## 🤝 Contributing
+We welcome contributions! Feel free to submit pull requests or report issues on our GitHub repository.
+
+## 📬 Contact
+For any inquiries or support, please reach out to wasiflh@connect.hku.hk
+
+---
+
+CourseSage HKU aims to streamline course selection for HKU students by providing detailed and actionable insights into course performance. Happy learning!
