@@ -6,7 +6,7 @@ const Name = () => {
       as="b"
       fontSize={{ base: "18px", md: "24px", lg: "30px" }}
     >
-      <a href="/">GPAid Alpha HKU</a>
+      <a href="/">CourseSage HKU</a>
     </Text>
   );
 };
