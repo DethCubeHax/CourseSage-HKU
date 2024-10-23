@@ -23,7 +23,7 @@ const assert = require('assert');
 const mongoose = require('mongoose');
 const { join } = require("path");
 const { Console } = require("console");
-mongoose.connect('mongodb://localhost:27017/richku2',{useNewURLParser: true});
+mongoose.connect('mongodb://127.0.0.1/richku2',{useNewURLParser: true});
 mongoose.set('strictQuery', true);
 
 //for the grades for each course

@@ -20,10 +20,6 @@ function Card(props) {
     useEffect(() => {
         data();
     }, [])
-    // const instructors = props.instructors;
-    // console.log("instructors are: ")
-    // console.log(props)
-    // console.log(instructors)
     const AddCourseButton = () => {
         if (verified==="Verified")
         {

@@ -1,61 +1,69 @@
-
-
-/* body {
-    padding: 50px;
-} */
-
-.Legend-colorBox1 {
-    width: 3rem;
-    height: 1rem;
-    display: inline-block;
-    background-color: rgba(255, 99, 132, 0.5);
-    border-color: rgba(255, 99, 132, 1.2);
-    border-width: 1px;
-    margin-right: 15px;
+.course-review-page {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: flex-start;
 }
 
-.Legend-colorBox2 {
-    width: 3rem;
-    height: 1rem;
-    display: inline-block;
-    background-color: rgba(54, 162, 235, 0.5);
-    border-color: rgba(54, 162, 235, 1.2);
-    border-width: 1px;
-    margin-right: 15px;
+/* Style for left side */
+.left-side {
+    flex-shrink: 0;  /* Prevent shrinking */
+    width: auto;     /* Allow it to take the space it needs */
+    margin-right: 40px; /* Add some spacing between the left and right sides */
 }
 
-.Legend-colorBox3 {
-    width: 3rem;
-    height: 1rem;
-    display: inline-block;
-    background-color: rgba(255, 206, 86, 0.5);
-    border-color: rgba(255, 206, 86, 1.2);
-    border-width: 1px;
-    margin-right: 15px;
+/* Style for right side */
+.right-side {
+    flex-grow: 1;  /* Allow the right side to take the remaining space */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-.Legend-colorBox4 {
-    width: 3rem;
-    height: 1rem;
-    display: inline-block;
-    background-color: rgba(75, 192, 192, 0.5);
-    border-color: rgba(75, 192, 192, 1.2);
-    border-width: 1px;
-    margin-right: 15px;
-}
-
+/* Legend styles */
+.Legend-colorBox1,
+.Legend-colorBox2,
+.Legend-colorBox3,
+.Legend-colorBox4,
 .Legend-colorBox5 {
     width: 3rem;
     height: 1rem;
     display: inline-block;
+    margin-right: 15px;
+}
+
+.Legend-colorBox1 {
+    background-color: rgba(255, 99, 132, 0.5);
+    border-color: rgba(255, 99, 132, 1.2);
+}
+
+.Legend-colorBox2 {
+    background-color: rgba(54, 162, 235, 0.5);
+    border-color: rgba(54, 162, 235, 1.2);
+}
+
+.Legend-colorBox3 {
+    background-color: rgba(255, 206, 86, 0.5);
+    border-color: rgba(255, 206, 86, 1.2);
+}
+
+.Legend-colorBox4 {
+    background-color: rgba(75, 192, 192, 0.5);
+    border-color: rgba(75, 192, 192, 1.2);
+}
+
+.Legend-colorBox5 {
     background-color: rgba(153, 102, 255, 0.5);
     border-color: rgba(153, 102, 255, 1.2);
-    border-width: 1px;
-    margin-right: 15px;
 }
 
 .legend {
     padding-top: 30px;
     padding-left: 45px;
     font-size: 15px;
+}
+
+/* Review card styling */
+.right-side .UserReview {
+    margin-bottom: 20px;
 }
